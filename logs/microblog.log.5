@@ -1,4 +1,61 @@
-2018-07-10 20:30:30,235 ERROR: Exception on /index [GET] [in /home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/app.py:1560]
+2018-07-10 00:11:42,187 INFO: Microblog startup [in /home/jsen/repos/microblog/app/__init__.py:57]
+2018-07-10 18:33:35,269 INFO: Microblog startup [in /home/jsen/repos/microblog/app/__init__.py:57]
+2018-07-10 18:33:51,470 ERROR: Exception on / [GET] [in /home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/app.py:1560]
+Traceback (most recent call last):
+  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/_compat.py", line 33, in reraise
+    raise value
+  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/jsen/repos/microblog/app/main/routes.py", line 12, in index
+    return render_template('index.html', title='Home')
+  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/templating.py", line 134, in render_template
+    context, ctx.app)
+  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/templating.py", line 116, in _render
+    rv = template.render(context)
+  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/jinja2/asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/jinja2/environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/jinja2/environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "/home/jsen/repos/microblog/app/templates/base.html", line 33, in template
+    {% block app_content %}{% endblock %}
+  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/jinja2/environment.py", line 1005, in render
+    return concat(self.root_render_func(self.new_context(vars)))
+  File "/home/jsen/repos/microblog/app/templates/index.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/jinja2/environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "/home/jsen/repos/microblog/app/templates/base.html", line 33, in template
+    {% block app_content %}{% endblock %}
+  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/jinja2/environment.py", line 543, in _generate
+    optimized=self.optimized)
+  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/jinja2/compiler.py", line 82, in generate
+    generator.visit(node)
+  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/jinja2/visitor.py", line 38, in visit
+    return f(node, *args, **kwargs)
+  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/jinja2/compiler.py", line 691, in visit_Template
+    self.fail('block %r defined twice' % block.name, block.lineno)
+  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/jinja2/compiler.py", line 309, in fail
+    raise TemplateAssertionError(msg, lineno, self.name, self.filename)
+jinja2.exceptions.TemplateAssertionError: block 'app_content' defined twice
+2018-07-10 18:38:16,068 INFO: Microblog startup [in /home/jsen/repos/microblog/app/__init__.py:57]
+2018-07-10 18:40:38,784 INFO: Microblog startup [in /home/jsen/repos/microblog/app/__init__.py:57]
+2018-07-10 18:47:01,791 INFO: Microblog startup [in /home/jsen/repos/microblog/app/__init__.py:57]
+2018-07-10 18:51:41,066 INFO: Microblog startup [in /home/jsen/repos/microblog/app/__init__.py:57]
+2018-07-10 18:51:44,473 ERROR: Exception on / [GET] [in /home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/app.py:1560]
 Traceback (most recent call last):
   File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/app.py", line 1982, in wsgi_app
     response = self.full_dispatch_request()
@@ -27,85 +84,15 @@ Traceback (most recent call last):
   File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
     raise value.with_traceback(tb)
   File "/home/jsen/repos/microblog/app/templates/index.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/home/jsen/repos/microblog/app/templates/base.html", line 1, in top-level template code
     {% extends 'bootstrap/base.html' %}
-  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/templating.py", line 57, in get_source
-    return self._get_source_fast(environment, template)
-  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/templating.py", line 85, in _get_source_fast
-    raise TemplateNotFound(template)
-jinja2.exceptions.TemplateNotFound: bootstrap/base.html
-2018-07-10 20:30:30,239 ERROR: Exception on /index [GET] [in /home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/app.py:1560]
-Traceback (most recent call last):
-  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/app.py", line 1982, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/app.py", line 1614, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/app.py", line 1517, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/_compat.py", line 33, in reraise
-    raise value
-  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/app.py", line 1612, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/app.py", line 1598, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/jsen/repos/microblog/app/main/routes.py", line 12, in index
-    return render_template('index.html', title='Home')
-  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/templating.py", line 134, in render_template
-    context, ctx.app)
-  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/templating.py", line 116, in _render
-    rv = template.render(context)
-  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/jinja2/asyncsupport.py", line 76, in render
-    return original_render(self, *args, **kwargs)
-  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/jinja2/environment.py", line 1008, in render
-    return self.environment.handle_exception(exc_info, True)
-  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/jinja2/environment.py", line 780, in handle_exception
-    reraise(exc_type, exc_value, tb)
-  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
-    raise value.with_traceback(tb)
-  File "/home/jsen/repos/microblog/app/templates/index.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/home/jsen/repos/microblog/app/templates/base.html", line 1, in top-level template code
-    {% extends 'bootstrap/base.html' %}
-  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/templating.py", line 57, in get_source
-    return self._get_source_fast(environment, template)
-  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/templating.py", line 85, in _get_source_fast
-    raise TemplateNotFound(template)
-jinja2.exceptions.TemplateNotFound: bootstrap/base.html
-2018-07-10 20:30:30,242 ERROR: Exception on /index [GET] [in /home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/app.py:1560]
-Traceback (most recent call last):
-  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/app.py", line 1982, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/app.py", line 1614, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/app.py", line 1517, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/_compat.py", line 33, in reraise
-    raise value
-  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/app.py", line 1612, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/app.py", line 1598, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/jsen/repos/microblog/app/main/routes.py", line 12, in index
-    return render_template('index.html', title='Home')
-  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/templating.py", line 134, in render_template
-    context, ctx.app)
-  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/templating.py", line 116, in _render
-    rv = template.render(context)
-  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/jinja2/asyncsupport.py", line 76, in render
-    return original_render(self, *args, **kwargs)
-  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/jinja2/environment.py", line 1008, in render
-    return self.environment.handle_exception(exc_info, True)
-  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/jinja2/environment.py", line 780, in handle_exception
-    reraise(exc_type, exc_value, tb)
-  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
-    raise value.with_traceback(tb)
-  File "/home/jsen/repos/microblog/app/templates/index.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "/home/jsen/repos/microblog/app/templates/base.html", line 1, in top-level template code
-    {% extends 'bootstrap/base.html' %}
-  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/templating.py", line 57, in get_source
-    return self._get_source_fast(environment, template)
-  File "/home/jsen/anaconda3/envs/flask-site/lib/python3.6/site-packages/flask/templating.py", line 85, in _get_source_fast
-    raise TemplateNotFound(template)
-jinja2.exceptions.TemplateNotFound: bootstrap/base.html
+jinja2.exceptions.TemplateRuntimeError: extended multiple times
+2018-07-10 18:52:17,151 INFO: Microblog startup [in /home/jsen/repos/microblog/app/__init__.py:57]
+2018-07-10 18:53:51,093 INFO: Microblog startup [in /home/jsen/repos/microblog/app/__init__.py:57]
+2018-07-10 18:57:28,413 INFO: Microblog startup [in /home/jsen/repos/microblog/app/__init__.py:57]
+2018-07-10 18:59:15,878 INFO: Microblog startup [in /home/jsen/repos/microblog/app/__init__.py:57]
+2018-07-10 18:59:27,620 INFO: Microblog startup [in /home/jsen/repos/microblog/app/__init__.py:57]
+2018-07-10 19:00:40,358 INFO: Microblog startup [in /home/jsen/repos/microblog/app/__init__.py:57]
+2018-07-10 19:02:56,630 INFO: Microblog startup [in /home/jsen/repos/microblog/app/__init__.py:57]
+2018-07-10 19:06:24,285 INFO: Microblog startup [in /home/jsen/repos/microblog/app/__init__.py:57]
+2018-07-10 19:10:57,608 INFO: Microblog startup [in /home/jsen/repos/microblog/app/__init__.py:57]
+2018-07-10 19:13:24,511 INFO: Microblog startup [in /home/jsen/repos/microblog/app/__init__.py:57]

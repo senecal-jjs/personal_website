@@ -1,8 +1,11 @@
-.col-3 {
-    width: 33%;
-    float: left;
+p {
+    text-align: left;
 }
 
-.row {
-    text-align: center;
+h1 {
+    font-size: 2em;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
