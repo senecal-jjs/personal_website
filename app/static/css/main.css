@@ -4,7 +4,6 @@
 
 a {
     text-decoration: none;
-    color: rgb(49, 93, 175);
 }
 
 ul {
@@ -49,19 +48,20 @@ body {
   
   .topnav {
     overflow: hidden;
-    background-color: rgb(223, 223, 223);
+    background-color: rgb(97, 28, 28);
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 30px auto;
   }
   
   .topnav a {
     float: right;
     display: block;
-    color: rgb(97, 28, 28);
+    color: rgb(255, 255, 255);
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     font-size: 20px;
+    font-weight: bold;
   }
   
   .topnav a:hover {
@@ -70,7 +70,7 @@ body {
   }
   
   .active {
-    background-color: rgb(179, 179, 179);
+    background-color: #ddd;
     color: white;
   }
   
@@ -114,6 +114,7 @@ body {
   }
 
   #profile {
+      width: 100%;
       max-width: 140px;
       border-radius: 50%;
   }
@@ -123,6 +124,16 @@ body {
       font-size: 20px;
       font-weight: bold;
       color: #494e52;
+  }
+
+  .post-title {
+      color: #494e52;
+      margin: 0;
+  }
+  
+  .post-date {
+      color: #62696e;
+      margin: 0;
   }
   
   @media screen and (max-width: 600px) {
