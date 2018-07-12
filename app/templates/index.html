@@ -1,53 +1,28 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-    <h1 style="padding-left: 15px; padding-top: 70px;">Featured Projects</h1>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card mb-4 box-shadow">
-                    <img class="card-img-top" src="{{ url_for('static', filename='img/flow.jpg') }}" style="height: 225px; width: 100%; display: block;">
-                    <div class="card-body">
-                        <p class="card-text">Computational Fluid Dynamics</p>
-                        <!-- <p class="card-text">A new algorithm was developed to compute the 
-                            interface curvature of gas-liquid interfaces. I investigated 
-                            how varying the scale used to compute the interface curvature
-                            impacted simulation accuracy through simulations of dynamic multiphase flows</p> -->
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card mb-4 box-shadow">
-                    <img class="card-img-top" src="{{ url_for('static', filename='img/shm.png') }}" style="height: 225px; width: 100%; display: block;">
-                    <div class="card-body">
-                        <p class="card-text">Acoustic Spectroscopy</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card mb-4 box-shadow">
-                    <img class="card-img-top" src="{{ url_for('static', filename='img/pong.png') }}" style="height: 225px; width: 100%; display: block;">
-                    <div class="card-body">
-                        <p class="card-text">Deeq Q-Learning</p>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-    </div>
+    <h1 style="margin-left: 33.33%;">Featured Projects</h1>
 
     <div class="row">
-        <div class="col-md-4">
-            One of three columns
+        <div class="col-4">
+            <div class="bio">
+                <div class="author_avatar">
+                    <img id="profile" class="author_avatar" src="{{ url_for('static', filename="img/prof_pic.jpg") }}">
+                </div>
+
+                <div class="author_desc">Jacob Senecal</div>
+
+                <div class="author_urls_wrapper">
+                    <ul class="author_urls social_icons">
+                        <li> <a href="#"><i class="fa fa-bitbucket-square fa-2x" aria-hidden="true"></i>Bitbucket</a></li>
+                        <li><a href="#"><i class="fa fa-linkedin-square" aria-hidden="true"></i>LinkedIn</a></li>
+                        <li><a href="#"><i class="fa fa-envelope-square" aria-hidden="true"></i>Email</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="col-md-4">
-            One of three columns
-        </div>
-        <div class="col-md-4">
-            One of three columns
+        <div class="col-8">
+            text
         </div>
     </div>
 
