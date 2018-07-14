@@ -18,3 +18,7 @@ class Config(object):
     ADMINS = ['your-email@example.com']
     DEBUG = True
     POSTS_PER_PAGE = 5
+    FLATPAGES_AUTO_RELOAD = DEBUG
+    FLATPAGES_EXTENSION = ".md"
+    FLATPAGES_ROOT = "content"
+    POST_DIR = "posts"

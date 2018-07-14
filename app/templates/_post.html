@@ -1,5 +1,5 @@
 <div class="post-head">
-    <a href="{{ url_for('blog.render_static', page_name=post.link) }}"><h2 class="post-title">{{ post.title }}</h2></a>
+    <a href="{{ url_for('blog.render_static', page_name=post.link.replace(".html", "")) }}"><h2 class="post-title">{{ post.title }}</h2></a>
     <p class="post-date">{{ post.timestamp }}</p>
     <p class=post-desc>{{ post.body }}</p>
 </div>

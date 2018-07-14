@@ -18,7 +18,7 @@
 
     {% block navbar %}
         <div class="topnav" id="myTopnav">
-            <a href="#home" class="active">Home</a>
+            <a href="{{ url_for('main.index') }}" class="active">Home</a>
             <a href="#news">News</a>
             <a href="#contact">Contact</a>
             <a href="{{ url_for('main.about') }}">About</a>
