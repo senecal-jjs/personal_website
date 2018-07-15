@@ -161,6 +161,16 @@ body {
       padding-left: 0;
       padding-top: 20px;
   }
+
+  .content {
+      max-width: 90%;
+      margin: 0 auto; 
+  }
+
+  .img_row {
+    display: flex;
+    justify-content: center;
+  }
   
   @media screen and (max-width: 600px) {
     .topnav a {display: none;}

@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-    {{ post.title }}
-    {{ post.date }}
-    {{ post.html|safe }}
+    <div class="content">
+        <h2 class="post-title">{{ post.title }}</h2>
+        <p class="post-date">{{ post.date }}</p>
+        
+        {{ post.html|safe }}
+    </div>
 {% endblock %}
