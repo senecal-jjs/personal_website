@@ -8,7 +8,7 @@
     <meta name="author" content="Jacob Senecal">
     <title>Senecal Blog</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web|Merriweather|Roboto+Mono|Source+Sans+Pro" rel="stylesheet"> 
     <!-- styles -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="stylesheet" href="{{ url_for('blog.pygments_css') }}">
@@ -19,24 +19,36 @@
 
     {% block navbar %}
         <div class="topnav" id="myTopnav">
-            <a href="{{ url_for('main.index') }}" class="active">Home</a>
-            <a href="#news">News</a>
-            <a href="#contact">Contact</a>
-            <a href="{{ url_for('main.about') }}">About</a>
+            <a href="{{ url_for('main.index') }}" class="nav-b active">Home</a>
+            <a href="#news" class="nav-b">Resume</a>
+            <a href="#contact" class="nav-b">Publications</a>
+            <a href="{{ url_for('main.about') }}" class="nav-b">About</a>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                 <i class="fa fa-bars"></i>
             </a>
         </div>
           
         <script>
-        function myFunction() {
-            var x = document.getElementById("myTopnav");
-            if (x.className === "topnav") {
-                x.className += " responsive";
-            } else {
-                x.className = "topnav";
+            function myFunction() {
+                var x = document.getElementById("myTopnav");
+                if (x.className === "topnav") {
+                    x.className += " responsive";
+                } else {
+                    x.className = "topnav";
+                }
             }
-        }
+
+            /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+            let container = document.getElementById("myTopnav");
+            let anchors = container.getElementsByClassName("nav-b");
+            
+            for (let i of anchors) {
+                i.addEventListener("click", function() {
+                    let current = document.getElementsByClassName("active");
+                    current[0].className = current[0].className.replace("active", "");
+                    this.className += "active";
+                })
+            }
         </script>
     {% endblock %}
 

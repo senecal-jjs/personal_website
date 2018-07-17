@@ -1,5 +1,5 @@
 title: Autonomous Submarine
-date: 2013-08-27
+date: 2018-07-13
 
 The robosub is an autonomous submarine that can complete a variety of different tasks. 
 The sub is capable of locating targets and firing its pneumatically powered torpedoes, 
@@ -29,7 +29,7 @@ grab objects beneath the sub, while the sliding actuator can extend the arm out 
 A new version of the robosub is currently being produced with improved thusters, and electronics management. The updated design will also allow for easier upgrades in the future.
 
 <div class="img_row">
-    <img class="col eight" src="{{ url_for('static', filename="img/grip.png") }}">
+    <img class="col-8" src="{{ url_for('static', filename="img/grip.png") }}">
 </div>
 
 <div class="col-12 caption">

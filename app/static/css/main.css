@@ -1,3 +1,7 @@
+/*========================*/
+/* General column styling */
+/*========================*/
+
 * {
     box-sizing: border-box;
 }
@@ -13,6 +17,7 @@ ul {
 .container {
     max-width: 1000px;
     margin: 0 auto;
+    padding-bottom: 50px;
 }
 
 .row::after {
@@ -46,17 +51,21 @@ body {
     color: #494e52;
   }
   
+/*======================*/
+/*  Navbar styling      */
+/*======================*/
   .topnav {
     overflow: hidden;
-    background-color: rgb(97, 28, 28);
+    background-color: whitesmoke;
     max-width: 1000px;
-    margin: 30px auto;
+    margin: 0 auto;
+    border-bottom: 5px solid black;
   }
   
   .topnav a {
     float: right;
     display: block;
-    color: rgb(255, 255, 255);
+    color: black;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -66,7 +75,6 @@ body {
   
   .topnav a:hover {
     background-color: #ddd;
-    color: rgb(192, 69, 69);
   }
   
   .active {
@@ -78,6 +86,9 @@ body {
     display: none;
   }
 
+/*=============================*/
+/*        Author sidebar       */
+/*=============================*/
   .author_urls {
       display: block;
       position: relative;
@@ -106,11 +117,10 @@ body {
   .social_icons i {
       font-size: 40px;
       padding-right: 7px;
-      color: rgb(97, 28, 28);
   }
 
   .social_icons i:hover {
-      color: rgb(192, 69, 69);
+      color: black;
   }
 
   #profile {
@@ -126,14 +136,26 @@ body {
       color: #494e52;
   }
 
+/*==========================*/
+/*   Post styling           */
+/*==========================*/
   .post-title {
       color: #494e52;
       margin: 0;
+  }
+
+  .content-title {
+    font-size: 35px;
   }
   
   .post-date {
       color: #62696e;
       margin: 0;
+  }
+
+  .post-desc {
+      font-family: "Source Sans Pro", sans-serif;
+      font-size: 1.1em;
   }
 
   .pager a {
@@ -165,6 +187,17 @@ body {
   .content {
       max-width: 90%;
       margin: 0 auto; 
+      padding-top: 50px;
+  }
+
+  .caption {
+      font-size: 0.9em;
+      text-align: center;
+  }
+
+  .content p {
+      font-family: "Source Sans Pro", sans-serif;
+      font-size: 1.1em;
   }
 
   .img_row {
