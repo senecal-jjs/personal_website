@@ -56,10 +56,10 @@ body {
 /*======================*/
   .topnav {
     overflow: hidden;
-    background-color: whitesmoke;
+    background-color: white;
     max-width: 1000px;
     margin: 0 auto;
-    border-bottom: 5px solid black;
+    border-bottom: 5px solid rgb(34, 35, 39);
   }
   
   .topnav a {
@@ -158,6 +158,19 @@ body {
       font-size: 1.1em;
   }
 
+  .post-head a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #000;
+    transition: width .3s;
+  }
+
+  .post-head a:hover::after {
+      width: 100%;
+  }
+
   .pager a {
       border: 1px #ddd solid;
       border-radius: 24px;
@@ -204,6 +217,10 @@ body {
     display: flex;
     justify-content: center;
   }
+
+  /*==================================*/
+  /*         Post title arrows        */
+  /*==================================*/
   
   @media screen and (max-width: 600px) {
     .topnav a {display: none;}
