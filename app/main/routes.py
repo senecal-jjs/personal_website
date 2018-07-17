@@ -22,7 +22,7 @@ def resume():
 
 @bp.route('/about')
 def about():
-    return "put about here"
+    return render_template('about.html')
 
 
 
