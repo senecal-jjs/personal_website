@@ -1,20 +1,27 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-    <div style="margin: 0 auto; float: none;" class="col-9">
-        I am a Master's student in the Numerical Intelligent Systems Lab at Montana
-        State, where we focus on applying machine learning, mathematics, and
-        software engineering to solve a variety of problems.
+    <div class="row">
+        <div class="content col-9">
+            <p>
+            I am a Master's student in the Numerical Intelligent Systems Lab at Montana
+            State, where we focus on applying machine learning, mathematics, and
+            software engineering to solve a variety of problems.
 
-        My interests are wide ranging, but I particularly enjoy working
-        with cyber-physical systems, and data intensive projects. In the past
-        I have worked at Los Alamos National Laboratory, where I applied computational
-        techniques to monitor the health of a variety of structures. I also spent
-        time working in the computational fluid dynamics field developing new algorithms
-        and visualizations. 
+            My interests are wide ranging, but I particularly enjoy working
+            with cyber-physical systems, and data intensive projects. In the past
+            I have worked at Los Alamos National Laboratory, where I applied computational
+            techniques to monitor the health of a variety of structures. I also spent
+            time working in the computational fluid dynamics field developing new algorithms
+            and visualizations. 
 
-        My research is focused on creating a technology to assess the health of large volumes of fruits
-        and vegetables using a combination of hyper-spectral imaging and machine learning. I am also 
-        currently an intern at Blackmore Sensors & Analytics, where I am developing tools to analyze LiDAR data.
+            My research is focused on creating a technology to assess the health of large volumes of fruits
+            and vegetables using a combination of hyper-spectral imaging and machine learning. I am also 
+            currently an intern at Blackmore Sensors & Analytics, where I am developing tools to analyze LiDAR data.</p>
+        </div>
+
+        <div class="content col-3">
+            <img style="max-width: 100%;" src="{{ url_for('static', filename="img/prof_pic.jpg") }}">
+        </div>
     </div>
 {% endblock %}

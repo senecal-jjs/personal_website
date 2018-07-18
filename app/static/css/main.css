@@ -211,13 +211,19 @@ body {
   .content p {
       font-family: "Source Sans Pro", sans-serif;
       font-size: 1.1em;
+      font-weight: 200;
+      margin: 0;
   }
 
   .img_row {
     display: flex;
     justify-content: center;
   }
-
+  
+  .row {
+      margin: 0 auto;
+      width: 80%;
+  }
   /*==================================*/
   /*         Post title arrows        */
   /*==================================*/
