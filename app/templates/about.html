@@ -2,7 +2,7 @@
 
 {% block app_content %}
     <div class="row">
-        <div class="content col-9">
+        <div class="content col-8">
             <p>
             I am a Master's student in the Numerical Intelligent Systems Lab at Montana
             State, where we focus on applying machine learning, mathematics, and
@@ -20,8 +20,21 @@
             currently an intern at Blackmore Sensors & Analytics, where I am developing tools to analyze LiDAR data.</p>
         </div>
 
-        <div class="content col-3">
-            <img style="max-width: 100%;" src="{{ url_for('static', filename="img/prof_pic.jpg") }}">
+        <div class="content col-4">
+            <img style="max-width: 100%;" src="{{ url_for('static', filename="img/prof_pic_tall.jpg") }}">
+        </div>
+    </div>
+
+    <div class="row news">
+        <h3>News</h3>
+        <div class="col-3">
+            <span>Jun 26</span>
+            <span>Jul 28</span>
+        </div>
+
+        <div class="col-9">
+            <p>testing</p>
+            <p>testing</p>
         </div>
     </div>
 {% endblock %}
