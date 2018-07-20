@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Titillium+Web|Merriweather|Roboto+Mono|Source+Sans+Pro" rel="stylesheet"> 
     <!-- styles -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/timeline.css') }}">
     <link rel="stylesheet" href="{{ url_for('blog.pygments_css') }}">
   </head>
 
@@ -20,7 +21,7 @@
     {% block navbar %}
         <div class="topnav" id="myTopnav">
             <a href="{{ url_for('main.index') }}" class="nav-b">Home</a>
-            <a href="#news" class="nav-b">Resume</a>
+            <a href="{{ url_for('main.resume') }}" class="nav-b">Resume</a>
             <a href="#contact" class="nav-b">Publications</a>
             <a href="{{ url_for('main.about') }}" class="nav-b">About</a>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">

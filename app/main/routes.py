@@ -18,7 +18,7 @@ def index():
 
 @bp.route('/resume')
 def resume():
-    return "put resume here"
+    return render_template('resume.html')
 
 @bp.route('/about')
 def about():
