@@ -21,7 +21,7 @@ class Config(object):
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     ADMINS = ['your-email@example.com']
-    DEBUG = True
+    DEBUG = False 
     POSTS_PER_PAGE = 5
     FLATPAGES_HTML_RENDERER = my_renderer
     FLATPAGES_AUTO_RELOAD = DEBUG
