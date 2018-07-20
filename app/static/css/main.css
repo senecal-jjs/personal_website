@@ -213,7 +213,8 @@ body {
       font-size: 1.1em;
       font-weight: 200;
       margin: 0;
-      padding-top: 5px;
+      padding-top: 10px;
+      padding-bottom: 10px;
   }
 
   .img_row {

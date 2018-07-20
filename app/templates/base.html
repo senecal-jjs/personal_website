@@ -19,7 +19,7 @@
 
     {% block navbar %}
         <div class="topnav" id="myTopnav">
-            <a href="{{ url_for('main.index') }}" class="nav-b active">Home</a>
+            <a href="{{ url_for('main.index') }}" class="nav-b">Home</a>
             <a href="#news" class="nav-b">Resume</a>
             <a href="#contact" class="nav-b">Publications</a>
             <a href="{{ url_for('main.about') }}" class="nav-b">About</a>
@@ -36,18 +36,6 @@
                 } else {
                     x.className = "topnav";
                 }
-            }
-
-            /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
-            let container = document.getElementById("myTopnav");
-            let anchors = container.getElementsByClassName("nav-b");
-            
-            for (let i of anchors) {
-                i.addEventListener("click", function() {
-                    let current = document.getElementsByClassName("active");
-                    current[0].className = current[0].className.replace("active", "");
-                    this.className += "active";
-                })
             }
         </script>
     {% endblock %}
