@@ -17,8 +17,9 @@ import io
 
 from torchvision import datasets, transforms
 
-import settings
-import helpers 
+from app.image_search import settings
+from app.image_search import helpers 
+#from app.image_search import run_pytorch_server
 
 
 redis_db = redis.StrictRedis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB)
@@ -35,6 +36,13 @@ def prepare_image(image):
     # keep image as numpy array so it can be serialized in Redis
     # change to torch tensor before feeding into network 
     return image.numpy()
+
+
+# @bp.before_app_first_request
+# def activate_pytorch_server():
+#     t = Thread(target=run_pytorch_server.classify_process(redis_db), args=())
+#     t.daemon = True
+#     t.start()
 
 
 @bp.route('/predict', methods=["POST"])
