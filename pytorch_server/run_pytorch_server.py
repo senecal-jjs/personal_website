@@ -45,8 +45,8 @@ def classify_process(redis_db):
     print("embedding path: {}".format(embedding_path))
 
     # index containing the embeddings of the images in the database 
-    image_feature_index = em.load_index(os.path.join(embedding_path, "image_feature_index"), 4096)
-    image_embeddings, path_map = em.load_features(os.path.join(embedding_path, "image_features"), os.path.join(embedding_path, "file_map"))
+    image_feature_index = em.load_index(os.path.join(embedding_path, "image_visual_feature_index"), 4096)
+    image_embeddings, path_map = em.load_features(os.path.join(embedding_path, "image_visual_features"), os.path.join(embedding_path, "file_map"))
 
     # continually pool for new images to classify
     while True:
