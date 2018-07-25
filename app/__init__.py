@@ -32,6 +32,9 @@ def create_app(config_class=Config):
     from app.blog import bp as blog_bp
     app.register_blueprint(blog_bp)
 
+    from app.image_search import bp as image_search_bp
+    app.register_blueprint(image_search_bp)
+
     if not app.debug and not app.testing:
         if app.config['MAIL_SERVER']:
             auth = None
