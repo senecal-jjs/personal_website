@@ -224,6 +224,7 @@ body {
   .img_row {
     display: flex;
     justify-content: center;
+    margin: 10px 0 10px 0;
   }
   
   .row {
@@ -256,6 +257,11 @@ body {
       font-size: 30px;
       margin: 0;
   }
+
+  /*================================*/
+  /*         Predict                */
+  /*================================*/
+
   
   @media screen and (max-width: 600px) {
     .topnav a {display: none;}

@@ -38,21 +38,17 @@ def prepare_image(image):
     return image.numpy()
 
 
-# @bp.before_app_first_request
-# def activate_pytorch_server():
-#     t = Thread(target=run_pytorch_server.classify_process(redis_db), args=())
-#     t.daemon = True
-#     t.start()
-
-
-@bp.route('/predict', methods=["POST"])
+@bp.route('/predict', methods=["GET", "POST"])
 def predict():
  # initialize the data dictionary that will be returned from the view
     data = {"success": False}
 
     # ensure an image was properly uploaded to our endpoint
     if flask.request.method == "POST":
-        if flask.request.files.get("image"):
+        print("file posted")
+        if "image" in flask.request.files:
+        #if flask.request.files.get("file"):
+            print("image detected")
             # read the image in PIL format and prepare it for classification
             image = flask.request.files["image"].read()
             image = Image.open(io.BytesIO(image))
@@ -92,5 +88,22 @@ def predict():
             # indicate that the request was a success
             data["success"] = True
 
-    # return the data dictionary as a JSON response
-    return flask.jsonify(data)
+        # return the data dictionary as a JSON response
+        if data["success"] == True:
+            # rework paths
+            paths = []
+            for path in data["paths"]:
+                p = path.split("/")
+                s = p[-3] + "/" + p[-2] + "/" + p[-1]
+                paths.append(s)
+            print(paths)
+            return render_template("predict.html", files=paths, message="Here are the most similar images found!")
+        else:
+            return render_template("predict.html", files="", message="There was an error!")
+        #return flask.jsonify(data)
+
+    elif flask.request.method == "GET":
+        return render_template("predict.html", files="")
+
+    
+
