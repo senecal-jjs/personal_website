@@ -256,6 +256,13 @@ body {
       font-size: 30px;
       margin: 0;
   }
+
+  /*================================*/
+  /*         Predict                */
+  /*================================*/
+  .img_predict {
+      max-width: 250px;
+  }
   
   @media screen and (max-width: 600px) {
     .topnav a {display: none;}
