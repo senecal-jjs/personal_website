@@ -1,5 +1,6 @@
 title: Autonomous Submarine
 date: 2018-07-13
+link: sub
 
 The robosub is an autonomous submarine that can complete a variety of different tasks. 
 The sub is capable of locating targets and firing its pneumatically powered torpedoes, 

@@ -1,5 +1,6 @@
 title: MiniMax & Game Playing AI
 date: 2018-07-12
+link: min
 
 Instructions:
 <ol>

@@ -1,5 +1,6 @@
 title: Deep Q-Learning
 date: 2018-07-12
+link: dqn
 
 Link to code: <a target="_blank" href="https://bitbucket.org/jsene/dqn-xpl/src/master/">Click here</a>
 

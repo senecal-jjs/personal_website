@@ -1,5 +1,6 @@
 title: Acoustic Wavenumber Spectroscopy
 date: 2018-07-13
+link: aws
 
 Link to paper: <a target="_blank" href="{{ url_for('static', filename="pdf/IWSHM Manuscript.pdf") }}">Click here</a>
 

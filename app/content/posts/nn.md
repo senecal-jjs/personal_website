@@ -1,5 +1,6 @@
 title: Neural Network from Scratch
 date: 2018-07-13
+link: nn
 
 Link to code: <a target="_blank" href="https://bitbucket.org/jsene/ga_evolve_mlp/src/master/">Click here</a>
 
