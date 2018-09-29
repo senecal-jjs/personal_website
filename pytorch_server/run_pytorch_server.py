@@ -72,7 +72,7 @@ def classify_process(redis_db):
 
             # otherwise, stack the data
             else:
-                batch = torch.stack([batch, image], dim=1)
+                batch = torch.stack([batch, image], dim=2)
                 print(batch.size())
                 batch = batch.view((batch.size(1), 3, 224, 224))
                 
