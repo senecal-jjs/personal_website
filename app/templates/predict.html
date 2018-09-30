@@ -5,7 +5,7 @@
     <form action="{{ url_for('image_search.predict') }}" method="post" enctype="multipart/form-data">
         Select image to upload:
         <input type="file" name="image" id="fileToUpload" accept="image/*">
-        <button class="button" type="submit">Upload</button>
+        <button style="padding:5px; border-radius:5px;" class="button" type="submit">Upload</button>
     </form>
 
     <p>{{ message }}</p>
