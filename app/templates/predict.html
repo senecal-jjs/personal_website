@@ -8,6 +8,10 @@
         <button style="padding:5px; border-radius:5px;" class="button" type="submit">Upload</button>
     </form>
 
+    <p>Disclaimer: The backend code assumes that 3 band (RGB) images are being uploaded, if something else (grayscale, svg) is 
+       uploaded the application will crash, since I don't have any error handling implemented. 
+    </p>
+
     <p>{{ message }}</p>
     {% for image in files %}
         <img class="img_predict" src="{{ url_for('static', filename=image) }}">
