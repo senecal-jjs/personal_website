@@ -14,6 +14,7 @@ import time
 import json
 import sys
 import io
+import os 
 
 from torchvision import datasets, transforms
 
@@ -45,62 +46,69 @@ def predict():
 
     # ensure an image was properly uploaded to our endpoint
     if flask.request.method == "POST":
-        print("file posted")
-        if "image" in flask.request.files:
-        #if flask.request.files.get("file"):
-            print("image detected")
-            # read the image in PIL format and prepare it for classification
-            image = flask.request.files["image"].read()
-            image = Image.open(io.BytesIO(image))
-            image = prepare_image(image)
+        try:
+            print("file posted")
+            if "image" in flask.request.files:
+            #if flask.request.files.get("file"):
+                print("image detected")
+                # read the image in PIL format and prepare it for classification
+                image = flask.request.files["image"].read()
+                image = Image.open(io.BytesIO(image))
+                image = prepare_image(image)
 
-            # ensure our NumPy array is C-contiguous as well,
-            # otherwise we won't be able to serialize it
-            image = image.copy(order="C")
+                # check that image shape is correct 
+                print("image shape: {}".format(image.shape))
+                assert image.shape == (3, 224, 224)
 
-            # generate an ID for the classification then add the
-            # classification ID + image to the queue
-            k = str(uuid.uuid4())
-            d = {"id": k, "image": helpers.base64_encode_image(image)}
-            redis_db.rpush(settings.IMAGE_QUEUE, json.dumps(d))
+                # ensure our NumPy array is C-contiguous as well,
+                # otherwise we won't be able to serialize it
+                image = image.copy(order="C")
 
-            # keep looping until our model server returns the output
-            # predictions
-            while True:
-                # attempt to grab the output predictions (similar image paths)
-                output = redis_db.get(k)
+                # generate an ID for the classification then add the
+                # classification ID + image to the queue
+                k = str(uuid.uuid4())
+                d = {"id": k, "image": helpers.base64_encode_image(image)}
+                redis_db.rpush(settings.IMAGE_QUEUE, json.dumps(d))
 
-                # check to see if our model has classified the input image
-                if output is not None:
-                     # add the output predictions to our data
-                     # dictionary so we can return it to the client
-                    output = output.decode("utf-8")
-                    data["paths"] = json.loads(output)
+                # keep looping until our model server returns the output
+                # predictions
+                while True:
+                    # attempt to grab the output predictions (similar image paths)
+                    output = redis_db.get(k)
 
-                    # delete the result from the database and break from the polling loop
-                    redis_db.delete(k)
-                    break
+                    # check to see if our model has classified the input image
+                    if output is not None:
+                        # add the output predictions to our data
+                        # dictionary so we can return it to the client
+                        output = output.decode("utf-8")
+                        data["paths"] = json.loads(output)
 
-                # sleep for a small amount to give the model a chance
-                # to classify the input image
-                time.sleep(settings.CLIENT_SLEEP)
+                        # delete the result from the database and break from the polling loop
+                        redis_db.delete(k)
+                        break
 
-            # indicate that the request was a success
-            data["success"] = True
+                    # sleep for a small amount to give the model a chance
+                    # to classify the input image
+                    time.sleep(settings.CLIENT_SLEEP)
 
-        # return the data dictionary as a JSON response
-        if data["success"] == True:
-            # rework paths
-            paths = []
-            for path in data["paths"]:
-                p = path.split("/")
-                s = p[-3] + "/" + p[-2] + "/" + p[-1]
-                paths.append(s)
-            print(paths)
-            return render_template("predict.html", files=paths, message="Here are the most similar images found!")
-        else:
-            return render_template("predict.html", files="", message="There was an error!")
-        #return flask.jsonify(data)
+                # indicate that the request was a success
+                data["success"] = True
+
+            # return the data dictionary as a JSON response
+            if data["success"] == True:
+                # rework paths
+                paths = []
+                for path in data["paths"]:
+                    p = path.split("/")
+                    s = p[-3] + "/" + p[-2] + "/" + p[-1]
+                    paths.append(s)
+                print(paths)
+                return render_template("predict.html", files=paths, message="Here are the most similar images found!")
+            else:
+                return render_template("predict.html", files="", message="There was an error!")
+        except:
+            os.system("redis-cli FLUSHALL")
+            return render_template("predict.html", files="", message="There was an error! RGB images should be uploaded. Anything else (svg, grayscale) will result in an error.")
 
     elif flask.request.method == "GET":
         return render_template("predict.html", files="")
