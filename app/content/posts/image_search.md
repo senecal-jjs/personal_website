@@ -6,8 +6,6 @@ link: image_search
 
 ### If you want to try out the app immediately, click <a href="{{ url_for('image_search.predict') }}">here.</a> 
 
-I've been working with different machine learning models such as neural networks,and decision trees on various research projects throughout the past year, but I haven't deployed these models in any type of production environment where efficiency is key. 
-
 For this project I built an efficient system that takes an image uploaded by a user and searches a small collection of images (~10,000) for the 10 most similar images in the collection. There are a few components that we need to make this system work.
 
 1. We need some way to compare how similar images are.
