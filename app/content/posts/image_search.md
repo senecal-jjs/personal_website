@@ -29,7 +29,7 @@ In order to quickly search for similar images we can pre-generate embeddings for
 Ok, so now we have a way to generate embeddings for images, and a way to structure these embeddings so that they are quickly and easily searchable. The final part of the system we need is a way to handle concurrent image uploads from users. For this part of the application I chose to use Redis, which allows us to store data structures in memory. As users submit images, these images are placed in a queue, stored using Redis. We also have a separate process running our convolutional neural network, that continually polls the Redis queue for images. When images are in the queue, they get pulled out put into a batch, and fed through the neural network simultaneously to produce embeddings for the images. These embeddings are then stored back in Redis. Backing up a bit, when the image was originally submitted by a user, a loop was entered that continually polls Redis for a result from the thread generating the embeddings. Once a result is returned (a result consists of a list of file paths to similar images stored on my server) the similar images can be displayed to the user. 
 
 <div class="img_row">
-    <img class="col-9" src="{{ url_for('static', filename="img/image_search_structure.jpg") }}">
+    <img class="col-9" src="{{ url_for('static', filename="img/arch.png") }}">
 </div>
 
 <div class="col-12 caption">
