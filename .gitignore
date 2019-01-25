@@ -39,3 +39,4 @@ Thumbs.db
 .cython
 .log 
 __pycache__
+*.pyc
