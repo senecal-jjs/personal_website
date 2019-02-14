@@ -2,6 +2,7 @@
 
 This is my personal website built using Flask.
 
+### How to add a new post?
 export FLASK_APP=microblog.py
 flask shell
 
