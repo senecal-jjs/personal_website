@@ -1,8 +1,10 @@
 import hmac
 from flask import request, Blueprint, jsonify, current_app 
 from git import Repo
+from app.git_hook import bp
+from flask import current_app
 
-@git_hook.route('/bitbucket', methods=['POST']) 
+@bp.route('/bitbucket', methods=['POST']) 
 def handle_github_hook(): 
     """ Entry point for github webhook """
 
