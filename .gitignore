@@ -40,5 +40,8 @@ Thumbs.db
 .log 
 __pycache__
 *.pyc
+app/errors/__pycache__/*
+app/__pycache__/*
+app/blog/__pycache__/*
 
-app/main/__pycache__/
+app/main/__pycache__/*
