@@ -1,4 +1,4 @@
 {
-    "python.pythonPath": "/home/jsen/anaconda3/envs/flask-site/bin/python",
+    "python.pythonPath": "/home/jsen/anaconda3/bin/python",
     "python.linting.pylintEnabled": false
 }

@@ -12,15 +12,6 @@ def my_renderer(text):
 
 class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'app.db')
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
-    MAIL_SERVER = os.environ.get('MAIL_SERVER')
-    MAIL_PORT = int(os.environ.get('MAIL_PORT') or 25)
-    MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS') is not None
-    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
-    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-    ADMINS = ['your-email@example.com']
     DEBUG = False 
     POSTS_PER_PAGE = 5
     FLATPAGES_HTML_RENDERER = my_renderer
@@ -28,3 +19,12 @@ class Config(object):
     FLATPAGES_EXTENSION = ".md"
     FLATPAGES_ROOT = "content"
     POST_DIR = "posts"
+
+    user = os.environ.get('POSTGRES_USER')
+    password = os.environ.get('POSTGRES_PASSWORD')
+    host = os.environ.get('POSTGRES_HOST')
+    database = os.environ.get('POSTGRES_DB')
+    port = os.environ.get('POSTGRES_PORT')
+
+    SQLALCHEMY_DATABASE_URI = f'postgresql+psycopg2://{user}:{password}@{host}:{port}/{database}'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
