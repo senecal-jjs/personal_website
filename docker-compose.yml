@@ -1,0 +1,41 @@
+version: '3.5'
+
+services:
+  flaskapp:
+    build: ./web
+    restart: always
+    expose:
+      - "8000"
+    volumes:
+      - ./web:/home/website-v3/app/web
+    depends_on:
+      - postgres
+    links:
+      - postgres 
+  
+  postgres:
+    restart: always
+    image: postgres:latest
+    volumes:
+      - ./postgres/data:/usr/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgresql
+      POSTGRES_PASSWORD: testing123
+      POSTGRES_DB: post_db
+    expose:
+      - "5432"
+
+   # Define the redis NGINX forward proxy container
+  nginx:
+
+    # build the nginx Dockerfile: http://bit.ly/2kuYaIv
+    build: nginx/
+    restart: always
+
+    # Expose port 80 to the host machine
+    ports:
+      - "80:80"
+
+    # The Flask application needs to be available for NGINX to make successful proxy requests
+    depends_on:
+      - flaskapp

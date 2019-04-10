@@ -24,6 +24,18 @@ def resume():
 def about():
     return render_template('about.html')
 
+@bp.route('/add', methods=['POST'])
+def add():
+    data = request.get_json()
+    title = data['title']
+    body = data['body']
+    link = data['link']
+
+    p = Post(title=title, body=body, link=link)
+    db.session.add(p)
+    db.session.commit()
+    return json.dumps("Added"), 200
+
 
 
 

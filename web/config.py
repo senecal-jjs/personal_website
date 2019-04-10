@@ -1,10 +1,8 @@
 import os
-from dotenv import load_dotenv
 from flask_flatpages.utils import pygmented_markdown
 from flask import render_template_string
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-load_dotenv(os.path.join(basedir, '.env'))
 
 def my_renderer(text):
     prerendered_body = render_template_string(text)
@@ -20,11 +18,9 @@ class Config(object):
     FLATPAGES_ROOT = "content"
     POST_DIR = "posts"
 
-    user = os.environ.get('POSTGRES_USER')
-    password = os.environ.get('POSTGRES_PASSWORD')
-    host = os.environ.get('POSTGRES_HOST')
-    database = os.environ.get('POSTGRES_DB')
-    port = os.environ.get('POSTGRES_PORT')
+    user = "postgresql"
+    password = "testing123"
+    database = "post_db"
 
-    SQLALCHEMY_DATABASE_URI = f'postgresql+psycopg2://{user}:{password}@{host}:{port}/{database}'
+    SQLALCHEMY_DATABASE_URI = f'postgresql://{user}:{password}@postgres:5432/{database}'
     SQLALCHEMY_TRACK_MODIFICATIONS = False

@@ -40,25 +40,6 @@ ENV NO_CUDA=1
 RUN conda install -y pytorch-cpu torchvision-cpu -c pytorch \
  && conda clean -ya
 
-# Install HDF5 Python bindings
-# RUN conda install -y h5py=2.8.0 \
-#  && conda clean -ya
-# RUN pip install --upgrade pip 
-# RUN pip install h5py-cache==1.0
-
-# # Install Graphviz
-# RUN conda install -y graphviz=2.38.0 \
-#  && conda clean -ya
-# RUN pip install graphviz==0.8.4
-
-# Install OpenCV3 Python bindings
-# RUN apt-get update && apt-get install -y --no-install-recommends \
-#     libgtk2.0-0 \
-#     libcanberra-gtk-module \
-#  && rm -rf /var/lib/apt/lists/*
-# RUN conda install -y -c menpo opencv3=3.1.0 \
-# && conda clean -ya
-
 RUN groupadd -r sitemanager && useradd -r -g sitemanager sitemanager
 
 WORKDIR /home/website-v3 
@@ -74,14 +55,9 @@ COPY webapp.py config.py boot.sh ./
 RUN chmod +x boot.sh 
 
 ENV FLASK_APP webapp.py 
-ENV POSTGRES_USER test
-ENV POSTGRES_PASSWORD testpassword123
-ENV POSTGRES_HOST postgres
-ENV POSTGRES_PORT 5432
-ENV POSTGRES_DB posts 
 
 RUN chown -R sitemanager:sitemanager ./
 USER sitemanager 
 
 EXPOSE 5000 
-ENTRYPOINT ["./boot.sh"]
+ENTRYPOINT ["gunicorn", "--bind", ":8000", "webapp:app", "--reload", "--workers", "4"]
