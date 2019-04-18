@@ -22,5 +22,5 @@ class Config(object):
     password = "testing123"
     database = "post_db"
 
-    SQLALCHEMY_DATABASE_URI = f'postgresql://{user}:{password}@postgres:5432/{database}'
+    SQLALCHEMY_DATABASE_URI = f'postgresql+psycopg2://{user}:{password}@postgres:5432/{database}'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
