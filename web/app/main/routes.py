@@ -26,8 +26,7 @@ def about():
 
 @bp.route('/add', methods=['POST'])
 def add():
-    data = request.get_json()
-    print(data)
+    data = request.get_json(force=True)
     title = data['title']
     body = data['body']
     link = data['link']
