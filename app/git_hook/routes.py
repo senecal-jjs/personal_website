@@ -1,6 +1,5 @@
 import hmac
 from flask import request, Blueprint, jsonify, current_app 
-from git import Repo
 from subprocess import Popen, PIPE
 from app.git_hook import bp
 from flask import current_app

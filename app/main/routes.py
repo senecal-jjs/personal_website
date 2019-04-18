@@ -1,4 +1,5 @@
 from datetime import datetime
+import json 
 from flask import render_template, flash, redirect, url_for, request, g, \
     jsonify, current_app
 from app import db
@@ -23,6 +24,14 @@ def resume():
 @bp.route('/about')
 def about():
     return render_template('about.html')
+
+@bp.route('/add', methods=['POST'])
+def add():
+    data = request.get_json(force=True)
+    print(request.is_json)
+    print(request)
+    print(data)
+    return json.dumps('Added'),200
 
 
 
