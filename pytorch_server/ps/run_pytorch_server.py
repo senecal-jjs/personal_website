@@ -30,7 +30,7 @@ import helpers
 import settings
 
 
-redis_db = redis.StrictRedis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB)
+redis_db = redis.StrictRedis(host=os.environ.get('REDIS_HOST'), port=os.environ.get('REDIS_PORT'), db=0)
 
 def classify_process(redis_db):
     # Load pretrained model 

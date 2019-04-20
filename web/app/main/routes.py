@@ -1,20 +1,20 @@
-from datetime import datetime
+from datetime import datetime 
+import time 
 from flask import render_template, flash, redirect, url_for, request, g, \
     jsonify, current_app
-from app import db
-from app.main import bp
-from app.models import Post 
+from app import pages 
+from app.main import bp 
 
+def date_to_int(date):
+    date = time.mktime(date.timetuple())
+    return date  
 
 @bp.route('/')
 @bp.route('/index')
 def index():
-    page = request.args.get('page', 1, type=int)
-    posts = Post.query.order_by(Post.timestamp.desc()).paginate(page, current_app.config['POSTS_PER_PAGE'], False) 
-    next_url = url_for('main.index', page=posts.next_num) if posts.has_next else None
-    prev_url = url_for('main.index', page=posts.prev_num) if posts.has_prev else None 
-
-    return render_template('index.html', title='Home', posts=posts.items, next_url=next_url, prev_url=prev_url)
+    posts = [ p for p in pages if p.path.startswith(current_app.config['POST_DIR']) ]
+    posts.sort(key=lambda item:date_to_int(item['date']), reverse=True)
+    return render_template('index.html', posts=posts)
 
 @bp.route('/resume')
 def resume():
