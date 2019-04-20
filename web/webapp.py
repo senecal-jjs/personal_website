@@ -1,4 +1,3 @@
-from app import create_app, db
-from app.models import Post
+from app import create_app
 
 app = create_app()

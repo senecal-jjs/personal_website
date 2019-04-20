@@ -1,5 +1,4 @@
 from flask import render_template, redirect
-from app import db
 from app.image_search import bp
 from flask import current_app
 
