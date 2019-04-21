@@ -1,5 +1,22 @@
 FROM ubuntu:18.04
 
+# os tools
+RUN apt-get update && apt-get install -y --no-install-recommends \
+         build-essential \
+         gcc \
+         libffi-dev \
+         libssl-dev \ 
+         libxslt-dev \
+         bash \
+         cmake \
+         git \
+         curl \
+         vim \
+         ca-certificates \
+         libjpeg-dev \
+         libpng-dev &&\
+rm -rf /var/lib/apt/lists/*
+
 # Install Miniconda
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PATH /opt/conda/bin:$PATH
