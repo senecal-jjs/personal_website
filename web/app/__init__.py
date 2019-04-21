@@ -31,8 +31,5 @@ def create_app(config_class=Config):
     from app.image_search import bp as image_search_bp
     app.register_blueprint(image_search_bp)
 
-    from app.git_hook import bp as git_hook_bp
-    app.register_blueprint(git_hook_bp)
-
     return app
 
