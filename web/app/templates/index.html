@@ -1,48 +1,32 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-    <h1 style="margin-left: 26%;">Recent Posts</h1>
 
-    <div class="col-3">
-        <div class="bio">
-            <div class="author_avatar">
-                <img id="profile" class="author_avatar" src="{{ url_for('static', filename="img/prof_pic.jpg") }}">
-            </div>
+    <div class="col-12">
+        <div class="container centered">
+            <div class="about">
+                <div class="avatar">
+                    <img src="{{ url_for('static', filename="img/prof_pic.jpg") }}">
+                </div>
 
-            <div class="author_desc">Jacob Senecal</div>
+                <h1>Jacob Senecal</h1>
+                <h2>Software Engineer</h2>
 
-            <div class="author_urls_wrapper">
-                <ul class="author_urls social_icons">
-                    <li> <a target="_blank" href="https://bitbucket.org/jsene/"><i class="fa fa-bitbucket-square fa-2x" aria-hidden="true"></i>Bitbucket</a></li>
-                    <li><a target="_blank" href="https://www.linkedin.com/in/jacob-senecal-481552111/"><i class="fa fa-linkedin-square" aria-hidden="true"></i>LinkedIn</a></li>
-                    <li><a target="_blank" href="mailto:senecaljacob@gmail.com"><i class="fa fa-envelope-square" aria-hidden="true"></i>Email</a></li>
+                <ul class="social_icons">
+                    <li> <a target="_blank" href="https://bitbucket.org/jsene/"><i class="fa fa-bitbucket-square fa-2x" aria-hidden="true"></i></a></li>
+                    <li><a target="_blank" href="https://www.linkedin.com/in/jacob-senecal-481552111/"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
+                    <li><a target="_blank" href="mailto:senecaljacob@gmail.com"><i class="fa fa-envelope-square" aria-hidden="true"></i></a></li>
                 </ul>
             </div>
+
+            <section class="footer">
+                <div class="container">
+                    <p>Copyright 2019 - Jacob Senecal</p>
+                </div>
+            </section>
         </div>
     </div>
 
-    <div style="margin-bottom: 30px;" class="col-9">
-        {% for post in posts %}
-            {% include '_post.html' %}
-        {% endfor %}
-
-        <!-- <nav aria-label="...">
-            <ul class="pager">
-                <li class="previous{% if not prev_url %} disabled{% endif %}">
-                    <a href="{{ prev_url or '#' }}">
-                        <span aria-hidden="true">&larr;</span> Newer Posts
-                    </a>
-                </li>
-                <li class="next{% if not next_url %} disabled{% endif %}">
-                    <a href="{{ next_url or '#' }}">
-                        Older Posts <span aria-hidden="true">&rarr;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav> -->
-    </div>
-
-    
 
 {% endblock %}
 

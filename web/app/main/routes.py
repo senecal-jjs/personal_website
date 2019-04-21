@@ -12,9 +12,13 @@ def date_to_int(date):
 @bp.route('/')
 @bp.route('/index')
 def index():
+    return render_template('index.html')
+
+@bp.route('/blog')
+def blog():
     posts = [ p for p in pages if p.path.startswith(current_app.config['POST_DIR']) ]
     posts.sort(key=lambda item:date_to_int(item['date']), reverse=True)
-    return render_template('index.html', posts=posts)
+    return render_template('blog.html', posts=posts)
 
 @bp.route('/resume')
 def resume():

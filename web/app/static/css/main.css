@@ -17,7 +17,17 @@ ul {
 .container {
     max-width: 1000px;
     margin: 0 auto;
-    padding-bottom: 50px;
+}
+
+.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10%;
+}
+
+.centered .about {
+  text-align: center;
 }
 
 .row::after {
@@ -47,8 +57,9 @@ ul {
 
 body {
     margin: 0;
-    font-family: 'Titillium Web', Helvetica, sans-serif;
-    color: #494e52;
+    font-family: 'Lato','Titillium Web', Helvetica, sans-serif;
+    /* color: #494e52; */
+    color: black;
   }
   
 /*======================*/
@@ -86,55 +97,61 @@ body {
     display: none;
   }
 
+.footer {
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  line-height: 2.0rem;
+  position: absolute;
+  bottom: 0.2rem;
+}
+
 /*=============================*/
 /*        Author sidebar       */
 /*=============================*/
-  .author_urls {
-      display: block;
-      position: relative;
-      margin: 0;
-      padding: 0;
-      border: 0;
-      background: transparent;
-      box-shadow: none;
-  }
+.avatar img {
+  width: 14rem;
+  height: auto;
+  border-radius: 50%;
+}
 
-  .author_urls_wrapper {
-      vertical-align: middle;
-      position: relative;
-  }
+.centered .about ul {
+  list-style: none;
+  margin: 2.0rem 0 1.0rem 0;
+  padding: 0;
+}
 
-  .author_urls a {
-      display: block;
-      margin-bottom: 5px;
-      padding-right: 5px;
-      padding-top: 2px;
-      color: inherit;
-      font-size: 1em;
-      text-decoration: none; 
-  }
+.centered .about ul li {
+  display: inline-block;
+  position: relative;
+}
 
-  .social_icons i {
-      font-size: 40px;
-      padding-right: 7px;
-  }
+.centered .about ul li a {
+  text-transform: uppercase;
+  margin-left: 1.0rem;
+  margin-right: 1.0rem;
+  font-size: 1.6rem;
+}
 
-  .social_icons i:hover {
-      color: black;
-  }
+.centered .about h1 {
+  margin-top: 1.7rem;
+}
 
-  #profile {
-      width: 100%;
-      max-width: 140px;
-      border-radius: 50%;
-  }
+.centered .about h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
 
-  .author_desc {
-      padding-top: 10px;
-      font-size: 20px;
-      font-weight: bold;
-      color: #494e52;
-  }
+.social_icons i {
+  color: #494e52;
+  font-size: 40px;
+  padding-right: 7px;
+}
+
+.social_icons i:hover {
+    color: black;
+}
+
 
 /*==========================*/
 /*   Post styling           */
@@ -142,6 +159,7 @@ body {
   .post-title {
       color: #494e52;
       margin: 0;
+      font-size: 1.4em;
   }
 
   .content-title {
