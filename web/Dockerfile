@@ -32,9 +32,6 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
     echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
     echo "conda activate base" >> ~/.bashrc
 
-# check python version
-RUN python --version 
-
 # No CUDA-specific steps
 ENV NO_CUDA=1
 RUN conda install -y pytorch-cpu torchvision-cpu -c pytorch \
