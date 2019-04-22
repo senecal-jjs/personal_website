@@ -45,7 +45,6 @@ WORKDIR /home/website-v3
 COPY requirements.txt requirements.txt 
 RUN pip install --upgrade setuptools 
 RUN pip install -r requirements.txt
-RUN pip install gunicorn 
 
 COPY app app 
 COPY webapp.py config.py ./ 

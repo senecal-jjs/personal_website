@@ -45,18 +45,19 @@ def predict():
 
     # ensure an image was properly uploaded to our endpoint
     if flask.request.method == "POST":
+        print("at try", flush=True)
         try:
             print("file posted")
             if "image" in flask.request.files:
             #if flask.request.files.get("file"):
-                print("image detected")
+                print("image detected", flush=True)
                 # read the image in PIL format and prepare it for classification
                 image = flask.request.files["image"].read()
                 image = Image.open(io.BytesIO(image))
                 image = prepare_image(image)
 
                 # check that image shape is correct 
-                print("image shape: {}".format(image.shape))
+                print("image shape: {}".format(image.shape), flush=True)
                 assert image.shape == (3, 224, 224)
 
                 # ensure our NumPy array is C-contiguous as well,
@@ -101,12 +102,12 @@ def predict():
                     p = path.split("/")
                     s = p[-3] + "/" + p[-2] + "/" + p[-1]
                     paths.append(s)
-                print(paths)
+                print(paths, flush=True)
                 return render_template("predict.html", files=paths, message="Here are the most similar images found!")
             else:
                 return render_template("predict.html", files="", message="There was an error!")
         except:
-            os.system("redis-cli FLUSHALL")
+            redis_db.flushall()
             return render_template("predict.html", files="", message="There was an error! RGB images should be uploaded. Anything else (svg, grayscale) will result in an error.")
 
     elif flask.request.method == "GET":

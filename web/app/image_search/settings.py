@@ -12,6 +12,6 @@ IMAGE_CHANS = 3
 IMAGE_DTYPE = "float32"
 
 # redis db settings
-REDIS_HOST = "localhost"
+REDIS_HOST = "redis"
 REDIS_PORT = "6379"
 REDIS_DB = 0 

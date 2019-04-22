@@ -34,15 +34,15 @@ redis_db = redis.StrictRedis(host=os.environ.get('REDIS_HOST'), port=os.environ.
 
 def classify_process(redis_db):
     # Load pretrained model 
-    print("Loading model...")
+    print("Loading model...", flush=True)
     net = models.vgg16(pretrained=True)
     embed_net = nn.Sequential(*list(net.classifier.children())[:-1])
     net.classifier = embed_net
     net.eval() 
-    print("Model loaded!")
+    print("Model loaded!", flush=True)
     
     embedding_path = os.path.join(os.getcwd(), "embeddings")
-    print("embedding path: {}".format(embedding_path))
+    print("embedding path: {}".format(embedding_path), flush=True)
 
     # index containing the embeddings of the images in the database 
     image_feature_index = em.load_index(os.path.join(embedding_path, "image_visual_feature_index"), 4096)
@@ -67,7 +67,7 @@ def classify_process(redis_db):
 
             # check to see if the batch list is None
             if batch is None:
-                print("fresh batch")
+                print("fresh batch", flush=True)
                 batch = image
 
             # otherwise, stack the data
@@ -83,7 +83,7 @@ def classify_process(redis_db):
         # check to see if we need to process the batch
         if len(imageIDs) > 0:
             # classify the batch
-            print("* Batch size: {}".format(batch.shape))
+            print("* Batch size: {}".format(batch.shape), flush=True)
             embeddings = net(batch)
 
             results = []
@@ -123,7 +123,7 @@ def classify_process(redis_db):
 if __name__ == "__main__":
     # load the function used to classify input images in a *separate*
     # thread than the one used for main classification
-    print("* Starting model service...")
+    print("* Starting model service...", flush=True)
     classify_process(redis_db)
     # t = Thread(target=classify_process, args=())
     # t.daemon = True
