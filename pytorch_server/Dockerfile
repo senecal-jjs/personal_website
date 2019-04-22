@@ -39,15 +39,12 @@ RUN groupadd -r sitemanager && useradd -r -g sitemanager sitemanager
 WORKDIR /home/pytorch_server
 COPY ps /home/pytorch_server
 
-ENV REDIS_HOST 'localhost'
+ENV REDIS_HOST 'redis'
 ENV REDIS_PORT 6379 
 
 # install requirements.txt 
 COPY requirements.txt requirements.txt 
 RUN pip install -r requirements.txt
-
-RUN chown -R sitemanager:sitemanager ./
-USER sitemanager 
 
 ENTRYPOINT ["python"]
 CMD ["run_pytorch_server.py"]
