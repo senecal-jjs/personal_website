@@ -45,3 +45,4 @@ app/__pycache__/*
 app/blog/__pycache__/*
 
 app/main/__pycache__/*
+.json

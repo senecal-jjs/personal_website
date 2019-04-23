@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <h1>Recent Posts</h1>
+
+    <div style="margin-bottom: 30px;" class="col-12">
+        {% for post in posts %}
+            {% include '_post.html' %}
+        {% endfor %}
+    </div>
+
+    
+
+{% endblock %}
+
