@@ -20,9 +20,10 @@
     <meta name="description" content="Senecal Website">
     <meta name="author" content="Jacob Senecal">
     <meta name="keywords" content="machine, learning, blog, technology, data, science">
-    <title>Senecal Blog</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Lato|Titillium+Web|Merriweather|Roboto+Mono|Source+Sans+Pro" rel="stylesheet"> 
+    <title>Jacob Senecal</title>
+    <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <link href="https://fonts.googleapis.com/css?family=Lato|Titillium+Web|Merriweather|Roboto+Mono|Baumans" rel="stylesheet"> 
     <!-- styles -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/timeline.css') }}">
@@ -34,7 +35,10 @@
 
     {% block navbar %}
         <div class="topnav" id="myTopnav">
-            <a href="{{ url_for('main.index') }}" class="nav-b">Home</a>
+            <a id="home" href="{{ url_for('main.index') }}" class="nav-b">
+                 >$ cd /home/
+                 <span class="logo_cursor"></span>
+            </a>
             <a href="{{ url_for('main.resume') }}" class="nav-b">CV</a>
             <a href="{{ url_for('main.about') }}" class="nav-b">About</a>
             <a href="{{ url_for('main.blog') }}" class="nav-b">Blog</a>
@@ -57,10 +61,8 @@
 
 
     {% block content %}
-        <div class="container">
-            {# application content needs to be provided in the app_content block #}
-            {% block app_content %}{% endblock %}
-        </div>
+        {# application content needs to be provided in the app_content block #}
+        {% block app_content %}{% endblock %}
     {% endblock %}
 
 </body>
