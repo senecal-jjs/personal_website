@@ -108,7 +108,6 @@ time {
 }
 
 .timeline ul li.in-view::after {
-  /* background: #F45B69; */
   background: gray;
 }
 
@@ -159,6 +158,6 @@ time {
   .timeline ul li:nth-child(even) div::before {
     left: -15px;
     border-width: 8px 16px 8px 0;
-    border-color: transparent #F45B69 transparent transparent;
+    border-color: transparent gray transparent transparent;
   }
 }
