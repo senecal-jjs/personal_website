@@ -57,7 +57,7 @@ ul {
 
 body {
     margin: 0;
-    font-family: 'Lato','Titillium Web', Helvetica, sans-serif;
+    font-family: 'Lato','Titillium Web', 'Helvetica', sans-serif;
     /* color: #494e52; */
     color: black;
     /* background-color: rgb(10, 25, 47); */
@@ -184,9 +184,9 @@ body {
 }
 
 .about h1 {
-  padding-top: 150px;
+  padding-top: 5%;
   margin-left: 15%;
-  font-size: 6rem;
+  font-size: 5.5rem;
   font-family: 'Titillium Web';
 }
 
@@ -205,6 +205,9 @@ body {
 /*==========================*/
 /*   Post styling           */
 /*==========================*/
+#blog-header{
+  margin-left: 1.4%;
+}
   .post-title {
       color: #494e52;
       margin: 0;
@@ -280,7 +283,6 @@ body {
   }
 
   .content p {
-      font-family: "Source Sans Pro", sans-serif;
       font-size: 1.1em;
       font-weight: 200;
       margin: 0;
@@ -341,6 +343,10 @@ body {
     .topnav a.icon {
       float: right;
       display: block;
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      color: black;
     }
   }
   
@@ -348,8 +354,8 @@ body {
     .topnav.responsive {position: relative;}
     .topnav.responsive .icon {
       position: absolute;
-      right: 0;
-      top: 0;
+      right: 10px;
+      top: 10px;
     }
     .topnav.responsive a {
       float: none;
