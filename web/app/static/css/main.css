@@ -142,11 +142,12 @@ body {
   }
 
 .footer {
-  width: 100%;
+  position: absolute;
+  bottom: 0.1rem;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
   text-align: center;
-  justify-content: center;
-  line-height: 2.0rem;
-  bottom: 0.2rem;
 }
 
 /*=============================*/
