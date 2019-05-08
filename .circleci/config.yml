@@ -27,7 +27,7 @@ jobs:
             docker-compose build
             set -x
             docker-compose up -d
-            bash ~/projects/certs.sh
+            bash ~/project/certs.sh
 
       - run:
           name: List Containers
