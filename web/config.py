@@ -18,9 +18,9 @@ class Config(object):
     FLATPAGES_ROOT = "content"
     POST_DIR = "posts"
 
-    user = "postgresql"
-    password = "testing123"
-    database = "post_db"
+    # user = "postgresql"
+    # password = "testing123"
+    # database = "post_db"
 
-    SQLALCHEMY_DATABASE_URI = f'postgresql+psycopg2://{user}:{password}@postgres:5432/{database}'
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    # SQLALCHEMY_DATABASE_URI = f'postgresql+psycopg2://{user}:{password}@postgres:5432/{database}'
+    # SQLALCHEMY_TRACK_MODIFICATIONS = False
