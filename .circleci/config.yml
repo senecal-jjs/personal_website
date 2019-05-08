@@ -12,6 +12,8 @@ jobs:
           name: Set Python Version
           command: |
             pyenv global 3.6.5
+            pip install requests
+            pip install unittest
 
       - run:
           name: Build Info
