@@ -18,9 +18,13 @@ jobs:
           name: Build Containers
           command: docker-compose build
 
+      - run:
+          name: List Containers
+          command: docker images
+
       - run: 
           name: Run Tests
-          command: docker-compose exec python web/tests.py
+          command: docker-compose run --rm flaskapp tests.py
 
 # version: 2
 #   jobs:
