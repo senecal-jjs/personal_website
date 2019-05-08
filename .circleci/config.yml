@@ -2,6 +2,7 @@ version: 2
 jobs:
   build:
     machine: true
+      image: circleci/classic:201808-01
     working-directory: ~/website_v3
 
     steps:
@@ -14,11 +15,11 @@ jobs:
             docker version
 
       - run: 
-          name: Build containers
+          name: Build Containers
           command: docker-compose build
 
       - run: 
-          name: Run tests
+          name: Run Tests
           command: docker-compose exec python web/tests.py
 
 # version: 2
