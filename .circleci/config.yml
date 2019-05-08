@@ -25,8 +25,8 @@ jobs:
       - run: 
           name: Run Tests
           command: |
-            python ~/project/web/tests.py
-          #command: docker-compose run --rm flaskapp python tests.py
+            #python ~/project/web/tests.py
+            docker-compose run --rm flaskapp python tests.py
 
 # version: 2
 #   jobs:
