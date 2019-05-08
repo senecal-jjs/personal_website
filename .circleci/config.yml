@@ -28,7 +28,7 @@ jobs:
             set -x
             docker run -d project_redis:latest
             docker run -d project_pytorch:latest
-            docker run -d 80:8000 project_flaskapp:latest
+            docker run -d -p 80:8000 project_flaskapp:latest
 
       - run:
           name: List Containers
