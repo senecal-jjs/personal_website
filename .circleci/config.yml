@@ -1,36 +1,55 @@
 version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/python:3.6.8
-        environment:
-          FLASK_CONFIG: testing
-    steps:
-      - checkout
-      - run:
-          name: Setup VirtualEnv
-          command: |
-            echo 'export TAG=0.1.${CIRCLE_BUILD_NUM}' >> $BASH_ENV
-            echo 'export IMAGE_NAME=python-circleci-docker' >> $BASH_ENV 
-            virtualenv helloworld
-            . helloworld/bin/activate
-            pip install --no-cache-dir -r web/requirements.txt
-      - run:
-          name: Run Tests
-          command: |
-            . helloworld/bin/activate
-            python test_hello_world.py
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - run:
-          name: Build and push Docker image
-          command: |
-            . helloworld/bin/activate
-            pyinstaller -F hello_world.py
-            docker build -t ariv3ra/$IMAGE_NAME:$TAG .
-            echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
-            docker push ariv3ra/$IMAGE_NAME:$TAG
-      - run:
-          name: Deploy app to Digital Ocean Server via Docker
-          command: |
-            ssh -o StrictHostKeyChecking=no root@hello.dpunks.org "/bin/bash ./deploy_app.sh ariv3ra/$IMAGE_NAME:$TAG"
+  jobs:
+    build:
+      machine: true
+      working-directory: ~/website_v3
+
+      steps:
+        - checkout 
+        - run: docker-compose build
+        - run: docker-compose exec python web/tests.py
+
+# version: 2
+#   jobs:
+#     build:
+#       docker:
+#         - image: circleci/golang:1.10
+#       working_directory: ~/web
+
+#       steps:
+#         - checkout 
+
+#         -run:
+#           name: Run flask tests
+#           command: |
+#             python tests.py
+        
+#         deploy:
+#           - run: 
+#             name: Build containers
+#             command: |
+#               docker-compose --build
+#               docker login -u $DOCKER_USER -p $DOCKER_PASS
+#               docker push myuser/myapp
+
+#           - run:
+#               name: Start container and verify it's working
+#               command: |
+#                 set -x
+#                 docker-compose up -d
+#                 # docker-compose will start 2 containers, the one with service will be named `contacts`
+#                 # we start another container with curl in the same network as `contacts`, this way we have
+#                 # all exposed ports from `contacts` available on `localhost` in this new container
+#                 docker run --network container:contacts \
+#                   appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:8080/contacts/test
+
+#           -run :
+#             name: Start service
+#             command: |
+#               echo 'example.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBJiGRY6N9WYQ0vy6cTiwAgNbc6ueJmVo/EafBtmT7bcD6cQMbipYM/KfYQ2lCn2TxqWepZKYoyoVQXgArycCOns=' >> ~/.ssh/known_hosts
+#               ssh root@example.com <<'ENDSSH'
+#               docker pull myuser/myapp
+#               docker-compose down
+#               docker image rm -f $(docker images -q)
+#               docker-compose up -d
+#               ENDSSH
