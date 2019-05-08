@@ -11,8 +11,7 @@ jobs:
       - run:
           name: Set Python Version
           command: |
-            pyenv versions
-            pyenv global 3.6.0
+            pyenv global 3.6.5
 
       - run:
           name: Build Info
