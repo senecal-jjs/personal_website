@@ -13,6 +13,8 @@ jobs:
           command: |
             docker-compose --version
             docker version
+            python --version
+            python3 --version
 
       - run: 
           name: Run Tests
