@@ -6,8 +6,20 @@ version: 2
 
       steps:
         - checkout 
-        - run: docker-compose build
-        - run: docker-compose exec python web/tests.py
+
+        - run:
+            name: Build Info
+            command: |
+              docker-compose --version
+              docker version
+
+        - run: 
+            name: Build containers
+            command: docker-compose build
+
+        - run: 
+            name: Run tests
+            command: docker-compose exec python web/tests.py
 
 # version: 2
 #   jobs:
