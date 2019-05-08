@@ -24,9 +24,10 @@ jobs:
 
       - run: 
           name: Run Tests
-          command: pwd
-          command: ls
-          command: python ~/website_v3/web/tests.py
+          command: |
+            pwd
+            ls
+            python ~/website_v3/web/tests.py
           #command: docker-compose run --rm flaskapp python tests.py
 
 # version: 2
