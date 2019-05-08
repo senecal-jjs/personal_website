@@ -27,10 +27,13 @@ jobs:
             docker-compose build
             set -x
             docker-compose up -d
+            bash ~/projects/certs.sh
 
       - run:
           name: List Containers
-          command: docker images
+          command: |
+            docker images
+            docker ps
 
       - run:
           name: Install Dockerize
@@ -41,14 +44,12 @@ jobs:
       - run:
           name: Wait for Up
           command: |
-            dockerize -wait tcp://localhost:6379 -timeout 1m
             dockerize -wait http://localhost:80 -timeout 1m
-
+            #dockerize -wait tcp://localhost:6379 -timeout 1m
+  
       - run: 
           name: Run Tests
           command: |
-            # pip install -r ~/project/web/requirements.txt
-            # python ~/project/web/tests.py
             python ~/project/tests_compose.py
 
 
