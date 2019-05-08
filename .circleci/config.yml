@@ -1,25 +1,25 @@
 version: 2
-  jobs:
-    build:
-      machine: true
-      working-directory: ~/website_v3
+jobs:
+  build:
+    machine: true
+    working-directory: ~/website_v3
 
-      steps:
-        - checkout 
+    steps:
+      - checkout 
 
-        - run:
-            name: Build Info
-            command: |
-              docker-compose --version
-              docker version
+      - run:
+          name: Build Info
+          command: |
+            docker-compose --version
+            docker version
 
-        - run: 
-            name: Build containers
-            command: docker-compose build
+      - run: 
+          name: Build containers
+          command: docker-compose build
 
-        - run: 
-            name: Run tests
-            command: docker-compose exec python web/tests.py
+      - run: 
+          name: Run tests
+          command: docker-compose exec python web/tests.py
 
 # version: 2
 #   jobs:
