@@ -25,7 +25,7 @@ jobs:
       - run: 
           name: Run Tests
           command: |
-            pip install ~/project/web/requirements.txt
+            pip install -r ~/project/web/requirements.txt
             python ~/project/web/tests.py
             #docker-compose run --rm flaskapp python tests.py
 
