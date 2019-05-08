@@ -9,12 +9,15 @@ jobs:
       - checkout 
 
       - run:
+          name: Set Python Version
+          command: pyenv global 3.6.0
+
+      - run:
           name: Build Info
           command: |
             docker-compose --version
             docker version
             python --version
-            python3 --version
 
       - run: 
           name: Run Tests
