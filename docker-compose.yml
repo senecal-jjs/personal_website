@@ -12,7 +12,7 @@ services:
    # Define the redis NGINX forward proxy container
   nginx:
     # build the nginx Dockerfile: http://bit.ly/2kuYaIv
-    build: nginx/
+    build: ./nginx/
     restart: always
 
     # Expose port 80 to the host machine

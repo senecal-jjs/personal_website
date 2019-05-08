@@ -26,8 +26,9 @@ jobs:
           command: |
             docker-compose build
             set -x
-            docker-compose up -d
-            #bash ~/project/certs.sh
+            docker run -d project_redis:latest
+            docker run -d project_pytorch:latest
+            docker run -d 80:8000 project_flaskapp:latest
 
       - run:
           name: List Containers
@@ -45,7 +46,7 @@ jobs:
           name: Wait for Up
           command: |
             dockerize -wait http://localhost:80 -timeout 1m
-            #dockerize -wait tcp://localhost:6379 -timeout 1m
+            dockerize -wait tcp://localhost:6379 -timeout 1m
   
       - run: 
           name: Run Tests
