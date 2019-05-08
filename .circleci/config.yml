@@ -21,19 +21,21 @@ jobs:
             python --version
 
       - run: 
-          name: Run Tests
-          command: |
-            pip install -r ~/project/web/requirements.txt
-            python ~/project/web/tests.py
-            #docker-compose run --rm flaskapp python tests.py
-
-      - run: 
           name: Build Containers
           command: docker-compose build
 
       - run:
           name: List Containers
           command: docker images
+
+      - run: 
+          name: Run Tests
+          command: |
+            # pip install -r ~/project/web/requirements.txt
+            # python ~/project/web/tests.py
+            set -x
+            docker-compose up -d
+            python ~/project/tests_compose.py
 
 
 # version: 2
