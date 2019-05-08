@@ -32,8 +32,6 @@ jobs:
       - run: 
           name: Run Tests
           command: |
-            # pip install -r ~/project/web/requirements.txt
-            # python ~/project/web/tests.py
             set -x
             docker-compose up -d
             python ~/project/tests_compose.py
