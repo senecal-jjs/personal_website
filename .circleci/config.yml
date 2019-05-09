@@ -65,7 +65,6 @@ jobs:
   deployment:
     dev:
       branch: master
-      - image: circleci/golang:1.10
     commands:
       - add_ssh_keys
 
