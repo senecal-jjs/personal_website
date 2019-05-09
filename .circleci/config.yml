@@ -62,12 +62,11 @@ jobs:
           docker push $DOCKER_USER/project_nginx:latest
           docker push $DOCKER_USER/project_pytorch:latest
 
-  deploy:
-    docker: 
+  deployment:
+    dev:
+      branch: master
       - image: circleci/golang:1.10
-    steps:
-      - attach-workspace:
-          at: src
+    commands:
       - add_ssh_keys
 
       - run:
