@@ -63,6 +63,8 @@ jobs:
           docker push $DOCKER_USER/project_pytorch:latest
 
   deploy-job:
+    docker:
+      - image: circleci/golang:1.10
     steps:
       - add_ssh_keys:
         fingerprints:
