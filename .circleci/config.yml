@@ -57,6 +57,10 @@ jobs:
         name: Upload Containers
         command: |
           docker login -u $DOCKER_USER -p $DOCKER_PASS
+          docker tag project_flaskapp:latest $DOCKER_USER/project_flaskapp:latest
+          docker tag project_redis:latest $DOCKER_USER/project_redis:latest
+          docker tag project_nginx:latest $DOCKER_USER/project_nginx:latest
+          docker tag project_pytorch:latest $DOCKER_USER/project_pytorch:latest
           docker push $DOCKER_USER/project_flaskapp:latest
           docker push $DOCKER_USER/project_redis:latest
           docker push $DOCKER_USER/project_nginx:latest
