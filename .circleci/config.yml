@@ -62,15 +62,15 @@ jobs:
           docker push $DOCKER_USER/project_nginx:latest
           docker push $DOCKER_USER/project_pytorch:latest
 
-  deployment:
-    dev:
-      branch: master
-    commands:
+  deploy:
+    docker:
+      - image: circleci/golang:1.10
+    steps:
+      - attach_workspace:
+          at: src
       - add_ssh_keys
 
-      - run:
-        name: Start Service
-        command: |
+      - run: |
           ssh-keyscan -H 172.104.211.248 >> ~/.ssh/known_hosts
           ssh snj@172.104.211.248 <<'ENDSSH'
           docker pull $DOCKER_USER/project_flaskapp:latest
