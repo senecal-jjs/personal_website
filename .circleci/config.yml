@@ -66,10 +66,6 @@ jobs:
             docker push $DOCKER_USER/project_nginx:latest
             docker push $DOCKER_USER/project_pytorch:latest
 
-  deploy:
-    docker:
-      - image: circleci/golang:1.10
-    steps:
       - add_ssh_keys:
           fingerprints:
             - "dd:d6:70:ff:f3:99:46:57:47:a3:a2:23:d2:4b:08:9e"
@@ -87,11 +83,4 @@ jobs:
           docker image rm -f $(docker images -q)
           docker-compose up -d
           ENDSSH
-
-workflows:
-  version: 2
-  workflow:
-    jobs:
-    - build
-    - deploy
 
