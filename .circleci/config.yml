@@ -5,9 +5,9 @@ jobs:
       image: circleci/classic:201808-01
     working-directory: ~/website_v3
 
-    - add_ssh_keys:
-      fingerprints:
-        - "dd:d6:70:ff:f3:99:46:57:47:a3:a2:23:d2:4b:08:9e"
+    # - add_ssh_keys:
+    #   fingerprints:
+    #     - "dd:d6:70:ff:f3:99:46:57:47:a3:a2:23:d2:4b:08:9e"
 
     steps:
       - checkout 
