@@ -51,27 +51,47 @@ jobs:
           name: Run Tests
           command: |
             python ~/project/tests_compose.py
+            docker kill $(docker ps -q)
+
+      - run:
+          name: Upload Containers
+          command: |
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker tag project_flaskapp:latest $DOCKER_USER/project_flaskapp:latest
+            docker tag project_redis:latest $DOCKER_USER/project_redis:latest
+            docker tag project_nginx:latest $DOCKER_USER/project_nginx:latest
+            docker tag project_pytorch:latest $DOCKER_USER/project_pytorch:latest
+            docker push $DOCKER_USER/project_flaskapp:latest
+            docker push $DOCKER_USER/project_redis:latest
+            docker push $DOCKER_USER/project_nginx:latest
+            docker push $DOCKER_USER/project_pytorch:latest
 
   deploy:
     docker:
       - image: circleci/golang:1.10
     steps:
-      - attach_workspace:
-          at: src
-      - add_ssh_keys
+      - add_ssh_keys:
+          fingerprints:
+            - "dd:d6:70:ff:f3:99:46:57:47:a3:a2:23:d2:4b:08:9e"
 
-      - run:
-        name: Pull Containers
+      - run: 
+        name: Deploy Application
         command: |
-          ssh-keyscan -H 192.168.1.162 >> ~/.ssh/known_hosts
+          ssh-keyscan -H 172.104.211.248 >> ~/.ssh/known_hosts
+          ssh snj@172.104.211.248 <<'ENDSSH'
+          docker pull $DOCKER_USER/project_flaskapp:latest
+          docker pull $DOCKER_USER/project_redis:latest
+          docker pull $DOCKER_USER/project_nginx:latest
+          docker pull $DOCKER_USER/project_pytorch:latest
+          docker-compose down
+          docker image rm -f $(docker images -q)
+          docker-compose up -d
+          ENDSSH
 
-#           -run :
-#             name: Start service
-#             command: |
-#               echo 'example.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBJiGRY6N9WYQ0vy6cTiwAgNbc6ueJmVo/EafBtmT7bcD6cQMbipYM/KfYQ2lCn2TxqWepZKYoyoVQXgArycCOns=' >> ~/.ssh/known_hosts
-#               ssh root@example.com <<'ENDSSH'
-#               docker pull myuser/myapp
-#               docker-compose down
-#               docker image rm -f $(docker images -q)
-#               docker-compose up -d
-#               ENDSSH
+workflows:
+  version: 2
+  workflow:
+    jobs:
+    - build
+    - deploy
+
