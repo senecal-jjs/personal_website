@@ -5,10 +5,6 @@ jobs:
       image: circleci/classic:201808-01
     working-directory: ~/website_v3
 
-    # - add_ssh_keys:
-    #   fingerprints:
-    #     - "dd:d6:70:ff:f3:99:46:57:47:a3:a2:23:d2:4b:08:9e"
-
     steps:
       - checkout 
       - add_ssh_keys
@@ -75,7 +71,7 @@ jobs:
           name: Deploy Application
           command: |
             ssh-keyscan -H 172.104.211.248 >> ~/.ssh/known_hosts
-            ssh snj@172.104.211.248 <<'ENDSSH'
+            ssh snj@172.104.211.248 
             docker pull $DOCKER_USER/project_flaskapp:latest
             docker pull $DOCKER_USER/project_redis:latest
             docker pull $DOCKER_USER/project_nginx:latest
@@ -83,5 +79,4 @@ jobs:
             docker-compose down
             docker image rm -f $(docker images -q)
             docker-compose up -d
-            ENDSSH
 
