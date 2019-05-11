@@ -52,7 +52,6 @@ jobs:
           name: Run Tests
           command: |
             python ~/project/tests_compose.py
-            docker kill $(docker ps -q)
 
       - run:
           name: Upload Containers
