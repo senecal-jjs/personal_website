@@ -9,6 +9,19 @@ jobs:
       - checkout 
       - add_ssh_keys
 
+      - run: 
+          name: Deploy Application
+          command: |
+            ssh-keyscan -H 172.104.211.248 >> ~/.ssh/known_hosts
+            ssh root@172.104.211.248 
+            docker pull $DOCKER_USER/project_flaskapp:latest
+            docker pull $DOCKER_USER/project_redis:latest
+            docker pull $DOCKER_USER/project_nginx:latest
+            docker pull $DOCKER_USER/project_pytorch:latest
+            docker-compose down
+            docker image rm -f $(docker images -q)
+            docker-compose up -d
+
       - run:
           name: Set Python Version
           command: |
@@ -66,16 +79,5 @@ jobs:
             docker push $DOCKER_USER/project_nginx:latest
             docker push $DOCKER_USER/project_pytorch:latest
 
-      - run: 
-          name: Deploy Application
-          command: |
-            ssh-keyscan -H 172.104.211.248 >> ~/.ssh/known_hosts
-            ssh snj@172.104.211.248 
-            docker pull $DOCKER_USER/project_flaskapp:latest
-            docker pull $DOCKER_USER/project_redis:latest
-            docker pull $DOCKER_USER/project_nginx:latest
-            docker pull $DOCKER_USER/project_pytorch:latest
-            docker-compose down
-            docker image rm -f $(docker images -q)
-            docker-compose up -d
+
 
