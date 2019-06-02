@@ -7,6 +7,20 @@ jobs:
 
     steps:
       - checkout 
+      - add_ssh_keys
+
+      - run: 
+          name: Deploy Application
+          command: |
+            ssh-keyscan -H 172.104.211.248 >> ~/.ssh/known_hosts
+            ssh snj@jacobsenecal.com
+            docker pull $DOCKER_USER/project_flaskapp:latest
+            docker pull $DOCKER_USER/project_redis:latest
+            docker pull $DOCKER_USER/project_nginx:latest
+            docker pull $DOCKER_USER/project_pytorch:latest
+            docker-compose down
+            docker image rm -f $(docker images -q)
+            docker-compose up -d
 
       - run:
           name: Set Python Version
@@ -51,7 +65,6 @@ jobs:
           name: Run Tests
           command: |
             python ~/project/tests_compose.py
-            docker kill $(docker ps -q)
 
       - run:
           name: Upload Containers
@@ -66,32 +79,5 @@ jobs:
             docker push $DOCKER_USER/project_nginx:latest
             docker push $DOCKER_USER/project_pytorch:latest
 
-  deploy:
-    docker:
-      - image: circleci/golang:1.10
-    steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "dd:d6:70:ff:f3:99:46:57:47:a3:a2:23:d2:4b:08:9e"
 
-      - run: 
-        name: Deploy Application
-        command: |
-          ssh-keyscan -H 172.104.211.248 >> ~/.ssh/known_hosts
-          ssh snj@172.104.211.248 <<'ENDSSH'
-          docker pull $DOCKER_USER/project_flaskapp:latest
-          docker pull $DOCKER_USER/project_redis:latest
-          docker pull $DOCKER_USER/project_nginx:latest
-          docker pull $DOCKER_USER/project_pytorch:latest
-          docker-compose down
-          docker image rm -f $(docker images -q)
-          docker-compose up -d
-          ENDSSH
-
-workflows:
-  version: 2
-  workflow:
-    jobs:
-    - build
-    - deploy
 
