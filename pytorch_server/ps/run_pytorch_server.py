@@ -35,7 +35,7 @@ redis_db = redis.StrictRedis(host=os.environ.get('REDIS_HOST'), port=os.environ.
 def classify_process(redis_db):
     # Load pretrained model 
     print("Loading model...", flush=True)
-    net = models.vgg16(pretrained=True)
+    net = models.mobilenet_v2(pretrained=True)
     embed_net = nn.Sequential(*list(net.classifier.children())[:-1])
     net.classifier = embed_net
     net.eval() 
