@@ -35,7 +35,7 @@ redis_db = redis.StrictRedis(host=os.environ.get('REDIS_HOST'), port=os.environ.
 def classify_process(redis_db):
     # Load pretrained model 
     print("Loading model...", flush=True)
-    net = models.vgg16(pretrained=True)
+    net = models.mobilenet_v2(pretrained=True)
     embed_net = nn.Sequential(*list(net.classifier.children())[:-1])
     net.classifier = embed_net
     net.eval() 
@@ -76,7 +76,6 @@ def classify_process(redis_db):
                 print(batch.size())
                 batch = batch.view((batch.size(1), 3, 224, 224))
                 
-
             # update the list of image IDs
             imageIDs.append(q["id"])
 
@@ -85,6 +84,10 @@ def classify_process(redis_db):
             # classify the batch
             print("* Batch size: {}".format(batch.shape), flush=True)
             embeddings = net(batch)
+            target = torch.zeros(1, 4096)
+            target[:, :1280] = embeddings
+            embeddings = target
+            print("Embeddings shape: {}".format(embeddings.shape))
 
             results = []
             for vec in embeddings:
