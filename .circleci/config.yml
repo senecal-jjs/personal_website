@@ -7,6 +7,20 @@ jobs:
 
     steps:
       - checkout 
+      - add_ssh_keys
+
+      - run: 
+          name: Deploy Application
+          command: |
+            ssh-keyscan -H 172.104.211.248 >> ~/.ssh/known_hosts
+            ssh snj@jacobsenecal.com
+            docker pull $DOCKER_USER/project_flaskapp:latest
+            docker pull $DOCKER_USER/project_redis:latest
+            docker pull $DOCKER_USER/project_nginx:latest
+            docker pull $DOCKER_USER/project_pytorch:latest
+            docker-compose down
+            docker image rm -f $(docker images -q)
+            docker-compose up -d
 
       - run:
           name: Set Python Version
@@ -23,12 +37,30 @@ jobs:
 
       - run: 
           name: Build Containers
-          command: docker-compose build
+          command: |
+            docker-compose build
+            set -x
+            docker run -d project_redis:latest
+            docker run -d project_pytorch:latest
+            docker run -d -p 80:8000 project_flaskapp:latest
 
       - run:
           name: List Containers
-          command: docker images
+          command: |
+            docker images
+            docker ps
 
+      - run:
+          name: Install Dockerize
+          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+          environment:
+            DOCKERIZE_VERSION: v0.3.0
+
+      - run:
+          name: Wait for Up
+          command: |
+            dockerize -wait http://localhost:80 -timeout 1m
+  
       - run: 
           name: Run Tests
           command: |
@@ -36,48 +68,18 @@ jobs:
             docker-compose up -d
             python ~/project/tests_compose.py
 
+      - run:
+          name: Upload Containers
+          command: |
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker tag project_flaskapp:latest $DOCKER_USER/project_flaskapp:latest
+            docker tag project_redis:latest $DOCKER_USER/project_redis:latest
+            docker tag project_nginx:latest $DOCKER_USER/project_nginx:latest
+            docker tag project_pytorch:latest $DOCKER_USER/project_pytorch:latest
+            docker push $DOCKER_USER/project_flaskapp:latest
+            docker push $DOCKER_USER/project_redis:latest
+            docker push $DOCKER_USER/project_nginx:latest
+            docker push $DOCKER_USER/project_pytorch:latest
 
-# version: 2
-#   jobs:
-#     build:
-#       docker:
-#         - image: circleci/golang:1.10
-#       working_directory: ~/web
 
-#       steps:
-#         - checkout 
 
-#         -run:
-#           name: Run flask tests
-#           command: |
-#             python tests.py
-        
-#         deploy:
-#           - run: 
-#             name: Build containers
-#             command: |
-#               docker-compose --build
-#               docker login -u $DOCKER_USER -p $DOCKER_PASS
-#               docker push myuser/myapp
-
-#           - run:
-#               name: Start container and verify it's working
-#               command: |
-#                 set -x
-#                 docker-compose up -d
-#                 # docker-compose will start 2 containers, the one with service will be named `contacts`
-#                 # we start another container with curl in the same network as `contacts`, this way we have
-#                 # all exposed ports from `contacts` available on `localhost` in this new container
-#                 docker run --network container:contacts \
-#                   appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:8080/contacts/test
-
-#           -run :
-#             name: Start service
-#             command: |
-#               echo 'example.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBJiGRY6N9WYQ0vy6cTiwAgNbc6ueJmVo/EafBtmT7bcD6cQMbipYM/KfYQ2lCn2TxqWepZKYoyoVQXgArycCOns=' >> ~/.ssh/known_hosts
-#               ssh root@example.com <<'ENDSSH'
-#               docker pull myuser/myapp
-#               docker-compose down
-#               docker image rm -f $(docker images -q)
-#               docker-compose up -d
-#               ENDSSH

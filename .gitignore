@@ -46,3 +46,4 @@ app/blog/__pycache__/*
 
 app/main/__pycache__/*
 .json
+.vscode

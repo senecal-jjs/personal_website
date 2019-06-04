@@ -1,5 +1,6 @@
 import requests
 import unittest
+import time
 
 
 class TestEndPoint(unittest.TestCase):		
@@ -15,5 +16,6 @@ class TestEndPoint(unittest.TestCase):
 		self.assertEqual(r.status_code, 200)
 
 if __name__ == '__main__':
+	time.sleep(5)
 	unittest.main(verbosity=2)
 
