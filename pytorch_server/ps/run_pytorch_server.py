@@ -85,10 +85,6 @@ def classify_process(redis_db):
             # classify the batch
             print("* Batch size: {}".format(batch.shape), flush=True)
             embeddings = net(batch)
-            target = torch.zeros(1, 4096)
-            target[:, :1280] = embeddings
-            embeddings = target
-            print("Embeddings shape: {}".format(embeddings.shape))
 
             results = []
             for vec in embeddings:
