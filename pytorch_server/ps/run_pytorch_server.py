@@ -77,7 +77,6 @@ def classify_process(redis_db):
                 print(batch.size())
                 batch = batch.view((batch.size(1), 3, 224, 224))
                 
-
             # update the list of image IDs
             imageIDs.append(q["id"])
 
