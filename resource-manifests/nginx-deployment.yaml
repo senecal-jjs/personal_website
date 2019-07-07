@@ -16,7 +16,7 @@ spec:
         app: nginx 
     spec:
       containers:
-        - image: ace149/nginx-develop
+        - image: ace149/nginx-rp-develop
           imagePullPolicy: Always
           name: nginx 
           ports:

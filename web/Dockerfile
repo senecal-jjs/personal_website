@@ -55,4 +55,4 @@ RUN chown -R sitemanager:sitemanager ./
 USER sitemanager 
 
 EXPOSE 5000 
-ENTRYPOINT ["gunicorn", "--bind", ":8000", "webapp:app", "--reload", "--workers", "4"]
+ENTRYPOINT ["gunicorn", "--bind", ":8000", "webapp:app", "--reload", "--workers", "2"]
