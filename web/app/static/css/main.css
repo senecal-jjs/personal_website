@@ -8,6 +8,7 @@
 
 a {
     text-decoration: none;
+    color: black;
 }
 
 ul {
@@ -200,6 +201,21 @@ body {
 
 .about ul li a:hover {
   color: rgb(100, 255, 218);
+}
+
+/*==========================*/
+/*    Project Cards         */
+/*==========================*/
+.card {
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+  padding: 16px;
+  margin: 5px;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+
+.card:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 

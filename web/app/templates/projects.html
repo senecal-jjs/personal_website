@@ -1,5 +1,25 @@
 {% extends "base.html" %}
 
 {% block app_content %}
+    <div class="img_row">
+        <div class="col-5 card">
+            <a href="{{ url_for('image_search.predict') }}">
+            <h3>Image Similarity Search</h3>
+            <p>Uses PyTorch to generate image embeddings, and performs
+                fast nearest neighbor search by indexing the embeddings in 
+                a KD-tree.
+            </p>
+            </a>
+        </div>
+
+        <div class="col-5 card">
+            <a href="{{ url_for('blog.render_static', page_name="min") }}">
+                <h3>MiniMax Tic-Tac-Toe</h3>
+                <p>Play against a tic-tac-toe agent employing the minimax strategy.
+                    The agent is written in javascript.
+                </p>
+            </a>
+        </div>
+    </div>
 
 {% endblock %}
