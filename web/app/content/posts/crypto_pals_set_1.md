@@ -10,7 +10,7 @@ a set of practical crypto challenges published by <a target="_blank" href="https
 Implementing these challenges in Rust has been a great way for me to reinforce both the cryptographic principals, and the Rust 
 language constructs. 
 
-I'm also looking to do a bit more technical writing, so I'll be summarizing my solutions to the challenges here, as well as my Rust learnings.
+I'll be summarizing some of what I learn here (without giving too much away about the challenge solutions!). 
 
 ---------------------
 
@@ -50,15 +50,16 @@ fn fixed_xor(a: &[u8], b: &[u8]) -> Vec<u8> {
 }
 ```
 
-One pleasant surprise for me has been how Rust can be often be written in a functional style, with a tree of expressions mapping values to other values, e.g. cycle -> take -> map. 
+One pleasant surprise for me has been how Rust can often be written in a functional style, with a tree of expressions mapping values to other values, e.g. cycle -> take -> map. There's also a distinction between `into_iter` and `iter` when creating an iterator. `into_iter` consumes the variable taking ownership, while `iter` operates on a reference. 
 
 Back to the cipher at hand. Substitution ciphers can be vulnerable to frequency analysis. That is, the characters in a given language typically have a characteristic frequency. For example, in English R, S, T, L, N, E are the most commonly occurring letters. If we decrypt a cipher text with a given key, we'd expect the frequency of characters in the plain text output to reasonably match known frequencies of letters occuring in typical English, if the key we used to decrypt is correct. 
 
 So our first step is to determine likely key sizes. We can then try random keys, and the one resulting in the best looking plaintext in terms of character frequency matching known English character frequency, is likely the correct key. 
 
-I'm just going to give the function for determining the key size. There are more in depth explanations online of why the key size that minimizes the normalized hamming distance between each key size block worth of bytes is likely the key size used to encrypt. 
+The Cryptopals challenge description gives you instructions on how to guess a key size. It involves computing the hamming distance between successive strings. I had to learn a little bit about string formatting in Rust to take a byte, and convert it to a string representation of the bits in that byte. I'm using "string" loosely here. There are distinctions in Rust between `String`, `&str` (string slice), and string literals. `str` known as a "string slice", is the only type present in the core Rust language, and as the Rust documentation notes, it's usually see in it's borrowed form `&str`. `String` is provided by the standard library, and is both growable and mutable. 
 
-First, the Hamming distance function. Hamming distance is simply the count of bits that differ between to byte arrays. I had to learn a little bit about string formatting in Rust to take a byte, and convert it to a string representation of the bits in that byte. I'm using "string" loosely here. There are distinctions in Rust between `String`, `&str` (string slice), and string literals. 
+The formatting `:0>8b` says fill with 0's from the left until we reach 8 bits, and `0u32` in the `fold` function says start with a value of 0 with data type of 32 bit unsigned integer. 
+
 
 ```rust
 pub fn hamming_distance(a: &[u8], b: &[u8]) -> u32 { 
@@ -79,36 +80,6 @@ pub fn hamming_distance(a: &[u8], b: &[u8]) -> u32 {
                     if c1 != c2 { sum + 1 } else { sum }
                 })
         })        
-}
-```
-
-Here's the function for determining key size. 
-
-```rust
-fn get_key_size(plain_text: &[u8]) -> usize {
-    let mut key_hamming_distance = Vec::new();
-    
-
-    // trying key sizes from 2 to 41 bytes based on the crypto pals suggestion
-    for key_size in 2..41 {
-        let mut i = 0;
-        let mut distance = 0.00;
-
-        while (i + 2) * key_size < plain_text.len() {
-            let word1 = &plain_text[i * key_size..(i + 1) * key_size];
-            let word2 = &plain_text[(i + 1) * key_size..(i + 2) * key_size];
-
-            distance += hamming::hamming_distance(word1, word2) as f32 / key_size as f32;
-
-            i += 1;
-        }
-        
-        key_hamming_distance.push((key_size, distance / (i + 1) as f32));
-    }
-
-    key_hamming_distance.sort_by(|a, b| a.1.partial_cmp(&b.1).unwrap());
-
-    key_hamming_distance[0].0
 }
 ```
 
@@ -150,3 +121,7 @@ pub fn break_cipher(cipher_bytes: &[u8]) -> u8 {
     key
 }
 ```
+
+That's all for the first set. Several Rust concepts introduced, including iterators, data types, ownership, matching and control flow, some common data types, and available standard library operations that can be applied to iterators. 
+
+I also got familiar with some basic cryptographic concepts and operations, XOR-ing byte arrays, convering between plaintext and ciphertext, and breaking a simple cipher. 
