@@ -38,3 +38,37 @@ This was a fun one! In this challenge we were able to inject our own malicious d
 Our goal is to elevate our role to admin. We have control over the user email, so `foo@bar.com` in the example above. 
 
 Again, the exploitable property here is that the same input to AES-ECB always results in the same output. We can use this property to determine the block size and, then craft an input email such that `role=` falls right at end of a block, causing the role, `user` to end up in the subsequent block. We can then replace that final block with one of our own making. This block might be an encrypted form of "admin" perhaps, and now we have an encrypted cookie with an elevated user role. 
+
+## Randomness & Rust & AES-CBC, oh my
+In set 2 of the challenges we were asked to implement AES-CBC mode. This mode prevents the same plaintext from always encrypting to the same ciphertext by introducing a random initial value, and chaining blocks together. 
+
+The steps look like,
+
+1. Create an initial value vector (IV) with size equal to the block size. 
+2. XOR the IV with the first plaintext block P<sub>1</sub>.
+3. XOR the resulting ciphertext block C<sub>1</sub> with the next plaintext block P<sub>2</sub> and so on. 
+
+By creating a random IV each time we encrypt, we prevent an identical plaintext from resulting in an identical ciphertext. 
+
+### Psuedo Random Number Generators (PRNGs)
+
+To produce the initial value for CBC mode I had to dive into the PRNGs available in the Rust libary `Rand`. The topic of randomness is complex enough that there is a <a target="_blank" href="https://rust-random.github.io/book/">Rust Rand Book</a> covering all of the options available in the `Rand` library. 
+
+For cryptographic purposes it's important to know that there is a difference between a run of the mill PRNG and a cryptographically secure PRNG. There is a concept of a true random number generator. A true random number generator is one in which all values are equally likely with no pattern or bias. Some natural processes can be considered true random number generators. The Rust Rand Book mentions atomic decay and thermal noise. 
+
+Essentially, a cryptographically secure PRNG is a better approximation of a true random number generator than a non cryptographically secure PRNG. There are two key traits of a cryptographically secure PRNG outlined in the Rust Rand Book. 
+
+ - Their state is sufficiently large that a brute-force approach simply trying all initial values is not a feasible method of finding the initial state used to produce an observed sequence of output values.
+
+- There is no other algorithm which is sufficiently better than the brute-force method which would make it feasible to predict the next output value.
+
+
+I ended up using `thread_rng` due to it's convenience. The Rust Rand Book has this to say,
+
+```
+Often you can just use thread_rng, a function which automatically initializes an RNG in thread-local memory and returns a reference to it. It is fast, good quality, and (to the best of our knowledge) cryptographically secure
+```
+
+However, there are several other cryptographically secure PRNGs within the RAND library that would likely be better choices for a production project. The Rust Rand Book actually explicitly states that `Rand` is not a cryptographic library, and recommends using specialized libraries. 
+
+I'm not really sure where that leaves the "cryptographically secure" PRNGs in `Rand`. The documentation calls them cryptographically secure, but then recommends using something else entirely. Maybe it's a case of not wanting to take on the heavy responsiblity of making claims of `Rand` being ready for production cryptography applications. 
