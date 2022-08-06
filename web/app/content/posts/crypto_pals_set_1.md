@@ -1,6 +1,6 @@
 title: Cryptopals Challenges - Set 1
 date: 2022-06-12
-link: crypto_pals_1
+link: crypto_pals_set_1
 
 I've recently been working my way through the book "Serious Cryptography" by Jean-Philippe Aumasson. It provides
 a practical discussion of many commonly used cryptographic principles, e.g. block and stream ciphers, randomness, RSA, Diffie-Helman, and TLS. 

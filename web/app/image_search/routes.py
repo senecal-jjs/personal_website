@@ -1,21 +1,18 @@
-from flask import render_template, redirect
+from flask import render_template
 from app.image_search import bp
 from flask import current_app
 
 from threading import Thread
 from PIL import Image
 import numpy as np
-import base64
 import flask
 import redis
 import uuid
 import time
 import json
-import sys
 import io
-import os 
 
-from torchvision import datasets, transforms
+from torchvision import transforms
 
 from app.image_search import settings
 from app.image_search import helpers 
