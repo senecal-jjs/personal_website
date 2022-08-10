@@ -31,6 +31,7 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
 
 # No CUDA-specific steps
 ENV NO_CUDA=1
+RUN conda install python=3.7
 RUN conda install -y pytorch-cpu torchvision-cpu -c pytorch \
  && conda clean -ya
 
