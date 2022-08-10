@@ -1,4 +1,6 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
+
+ENV DEBIAN_FRONTEND noninteractive
 
 # os tools
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -14,6 +16,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
          vim \
          ca-certificates \
          libjpeg-dev \
+         python3-dev \
+         cargo \
+         python3-pip \
          libpng-dev &&\
 rm -rf /var/lib/apt/lists/*
 
@@ -43,8 +48,8 @@ WORKDIR /home/website-v3
 
 # install requirements.txt 
 COPY requirements.txt requirements.txt 
-RUN pip install --upgrade setuptools 
-RUN pip install -r requirements.txt
+RUN pip3 install --upgrade setuptools 
+RUN pip3 install -r requirements.txt
 
 COPY app app 
 COPY webapp.py config.py ./ 
