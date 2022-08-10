@@ -1,6 +1,6 @@
 title: Cryptopals Challenges - Set 2
 date: 2022-06-18
-link: crypto_pals_2
+link: crypto_pals_set_2
 
 On to Set 2 of the Cryptopals challenges! I'm only going to cover a select few of the problems presented in this set. 
 

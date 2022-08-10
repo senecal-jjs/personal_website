@@ -1,4 +1,6 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
+
+ENV DEBIAN_FRONTEND noninteractive
 
 # os tools
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -14,28 +16,31 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
          vim \
          ca-certificates \
          libjpeg-dev \
+         python3-dev \
+         cargo \
+         python3-pip \
          libpng-dev &&\
 rm -rf /var/lib/apt/lists/*
 
 # Install Miniconda
-ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
-ENV PATH /opt/conda/bin:$PATH
+# ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
+# ENV PATH /opt/conda/bin:$PATH
 
-RUN apt-get update --fix-missing && apt-get install -y wget bzip2 ca-certificates \
-    libglib2.0-0 libxext6 libsm6 libxrender1 \
-    git mercurial subversion
+# RUN apt-get update --fix-missing && apt-get install -y wget bzip2 ca-certificates \
+#     libglib2.0-0 libxext6 libsm6 libxrender1 \
+#     git mercurial subversion
 
-RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh && \
-    /bin/bash ~/miniconda.sh -b -p /opt/conda && \
-    rm ~/miniconda.sh && \
-    ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
-    echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
-    echo "conda activate base" >> ~/.bashrc
+# RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh && \
+#     /bin/bash ~/miniconda.sh -b -p /opt/conda && \
+#     rm ~/miniconda.sh && \
+#     ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
+#     echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
+#     echo "conda activate base" >> ~/.bashrc
 
-# No CUDA-specific steps
-ENV NO_CUDA=1
-RUN conda install -y pytorch-cpu torchvision-cpu -c pytorch \
- && conda clean -ya
+# # No CUDA-specific steps
+# ENV NO_CUDA=1
+# RUN conda install -y pytorch-cpu torchvision-cpu -c pytorch \
+#  && conda clean -ya
 
 RUN groupadd -r sitemanager && useradd -r -g sitemanager sitemanager
 
@@ -43,8 +48,8 @@ WORKDIR /home/website-v3
 
 # install requirements.txt 
 COPY requirements.txt requirements.txt 
-RUN pip install --upgrade setuptools 
-RUN pip install -r requirements.txt
+RUN pip3 install --upgrade setuptools 
+RUN pip3 install -r requirements.txt
 
 COPY app app 
 COPY webapp.py config.py ./ 

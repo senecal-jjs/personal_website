@@ -4,9 +4,9 @@ from flask import render_template_string
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-def my_renderer(text):
+def my_renderer(text, flatpages):
     prerendered_body = render_template_string(text)
-    return pygmented_markdown(prerendered_body)
+    return pygmented_markdown(prerendered_body, flatpages)
 
 class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
@@ -16,6 +16,12 @@ class Config(object):
     FLATPAGES_AUTO_RELOAD = DEBUG
     FLATPAGES_EXTENSION = ".md"
     FLATPAGES_ROOT = "content"
+    FLATPAGES_EXTENSION_CONFIGS = {
+        'codehilite': {
+            'linenums': 'True',
+            'guess_lang': 'False'
+        }
+    }
     POST_DIR = "posts"
 
     # user = "postgresql"
