@@ -2,7 +2,6 @@ from flask import render_template
 from app.image_search import bp
 from flask import current_app
 
-from threading import Thread
 from PIL import Image
 import numpy as np
 import flask
@@ -13,20 +12,10 @@ import json
 import io
 import cv2
 
-from torchvision import transforms
-
 from app.image_search import settings
 from app.image_search import helpers 
 
-
 redis_db = redis.StrictRedis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB)
-
-# Create preporcessing transform 
-data_transform = transforms.Compose([transforms.Resize((224,224)),
-                                     transforms.ToTensor(),
-                                     transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                                                          std=[0.229, 0.224, 0.225])
-                                    ])
 
 def standardize(image, mean, std):
     if image.ndim < 3:
@@ -57,13 +46,6 @@ def standardize(image, mean, std):
     # return with channels first ordering
     return np.moveaxis(standardized_img, 2, 0)
 
-def prepare_image(image):
-    image = data_transform(image)
-    # keep image as numpy array so it can be serialized in Redis
-    # change to torch tensor before feeding into network 
-    return image.numpy()
-
-
 @bp.route('/predict', methods=["GET", "POST"])
 def predict():
  # initialize the data dictionary that will be returned from the view
@@ -80,7 +62,6 @@ def predict():
                 # read the image in PIL format and prepare it for classification
                 image = flask.request.files["image"].read()
                 image = Image.open(io.BytesIO(image))
-#                image = prepare_image(image)
                 image = standardize(
                     image = np.asarray(image), 
                     mean = [0.485, 0.456, 0.406], 
