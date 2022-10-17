@@ -9,7 +9,7 @@ services:
     volumes:
       - ./web:/home/website-v3/app/web
 
-   # Define the redis NGINX forward proxy container
+   # Define the NGINX forward proxy container
   nginx:
     # build the nginx Dockerfile: http://bit.ly/2kuYaIv
     build: ./nginx/

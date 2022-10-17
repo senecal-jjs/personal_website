@@ -11,12 +11,12 @@ import uuid
 import time
 import json
 import io
+import cv2
 
 from torchvision import transforms
 
 from app.image_search import settings
 from app.image_search import helpers 
-#from app.image_search import run_pytorch_server
 
 
 redis_db = redis.StrictRedis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB)
@@ -27,6 +27,35 @@ data_transform = transforms.Compose([transforms.Resize((224,224)),
                                      transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                                           std=[0.229, 0.224, 0.225])
                                     ])
+
+def standardize(image, mean, std):
+    if image.ndim < 3:
+        raise ValueError(
+            f"Expected tensor to be a tensor image of size (..., C, H, W). Got tensor.size() = {image.size()}"
+        )
+
+    image = cv2.resize(
+        src = image, 
+        dsize = (224, 224), 
+        interpolation = cv2.INTER_CUBIC
+    )
+
+    image = image.astype(float) / 255
+    image = np.asarray(image, dtype='float32')
+
+    mean = np.asarray(mean, dtype='float32')
+    std = np.asarray(std, dtype='float32')
+
+    if (mean.ndim == 1):
+        mean = np.reshape(mean, (1, 1, -1))
+
+    if (std.ndim == 1):
+        std = np.reshape(std, (1, 1, -1))
+
+    standardized_img = np.divide(np.subtract(image, mean), std)
+
+    # return with channels first ordering
+    return np.moveaxis(standardized_img, 2, 0)
 
 def prepare_image(image):
     image = data_transform(image)
@@ -51,7 +80,12 @@ def predict():
                 # read the image in PIL format and prepare it for classification
                 image = flask.request.files["image"].read()
                 image = Image.open(io.BytesIO(image))
-                image = prepare_image(image)
+#                image = prepare_image(image)
+                image = standardize(
+                    image = np.asarray(image), 
+                    mean = [0.485, 0.456, 0.406], 
+                    std = [0.229, 0.224, 0.225]
+                )
 
                 # check that image shape is correct 
                 print("image shape: {}".format(image.shape), flush=True)
