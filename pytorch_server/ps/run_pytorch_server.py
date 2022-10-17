@@ -1,28 +1,11 @@
-# USAGE
-# Start the server:
-# 	python run_keras_server.py
-# Submit a request via cURL:
-# 	curl -X POST -F image=@jemma.png 'http://localhost:5000/predict'
-# Submita a request via Python:
-#	python simple_request.py 
-
-# import the necessary packages
-from PIL import Image
-import numpy as np
-import base64
 import redis
-import uuid
 import time
 import json
-import sys
-import io
 import os 
 
 import torch 
 import torch.nn as nn
-import torchvision
 import torchvision.models as models
-from torchvision import datasets, transforms
 
 # local modules 
 import embedding as em 
@@ -35,7 +18,7 @@ redis_db = redis.StrictRedis(host=os.environ.get('REDIS_HOST'), port=os.environ.
 def classify_process(redis_db):
     # Load pretrained model 
     print("Loading model...", flush=True)
-    net = models.mobilenet_v2(pretrained=True)
+    net = models.mobilenet_v2(weights='IMAGENET1K_V1')
     embed_net = nn.Sequential(*list(net.classifier.children())[:-1])
     net.classifier = embed_net
     net.eval() 
