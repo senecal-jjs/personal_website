@@ -1,0 +1,51 @@
+# flyctl launch added from .gitignore
+# Compiled source #
+###################
+**/*.com
+**/*.class
+**/*.dll
+**/*.exe
+**/*.o
+**/*.so
+
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+**/*.7z
+**/*.dmg
+**/*.gz
+**/*.iso
+**/*.jar
+**/*.rar
+**/*.tar
+**/*.zip
+
+# Logs and databases #
+######################
+**/*.log
+**/*.sql
+**/*.sqlite
+
+# OS generated files #
+######################
+**/.DS_Store
+**/.DS_Store?
+**/._*
+**/.Spotlight-V100
+**/.Trashes
+**/ehthumbs.db
+**/Thumbs.db
+
+**/.cython
+**/.log 
+**/__pycache__
+**/*.pyc
+**/app/errors/__pycache__/*
+**/app/__pycache__/*
+**/app/blog/__pycache__/*
+
+**/app/main/__pycache__/*
+**/.json
+**/.vscode
+fly.toml
